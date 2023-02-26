@@ -1,6 +1,5 @@
 import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 
-
 // 2. Add your color mode config
 const config: ThemeConfig = {
   initialColorMode: "dark",
@@ -12,5 +11,12 @@ export const theme = extendTheme({
   config,
   fonts: {
     body: `Rajdhani, sans-serif`,
+  },
+  styles: {
+    global: {
+      body: {
+        bg: "#0E0D10",
+      },
+    },
   },
 });
