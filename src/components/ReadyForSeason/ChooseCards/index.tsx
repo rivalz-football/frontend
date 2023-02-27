@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   Flex,
@@ -6,10 +7,8 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { Grid, GridItem } from "@chakra-ui/react";
 import { CardItem } from "./CardItem";
 import { cards } from "assets/data/cards";
-import { StaticImageData } from "next/image";
 import { Step } from "containers/Home";
 type ChoseCardType = {
   setStep: (step: Step) => void;
@@ -23,7 +22,7 @@ export const ChooseCards = (props: ChoseCardType) => {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      maxWidth="container.md"
+      maxWidth="container.lg"
       padding="10px"
     >
       <Text
@@ -33,7 +32,7 @@ export const ChooseCards = (props: ChoseCardType) => {
         color="#FFFFFF"
         textTransform="uppercase"
       >
-        rivalz cards
+        RivalZ Cards
       </Text>
       <Text
         fontSize="16px"
@@ -51,7 +50,12 @@ export const ChooseCards = (props: ChoseCardType) => {
         can purchase more football players for your team by using multiple
         cards.
       </Text>
-      <SimpleGrid columns={[1, 2, 3, 4, 4]} gap="35px" marginTop="35px">
+      <SimpleGrid
+        gap="35px"
+        marginTop="35px"
+        templateColumns="repeat(auto-fill, minmax(220px, 1fr))"
+        width="100%"
+      >
         {cards.map((card, index) => (
           <CardItem key={index} card={card} />
         ))}
@@ -63,7 +67,7 @@ export const ChooseCards = (props: ChoseCardType) => {
         flexDirection={{ base: "column", md: "row" }}
         gap="10px"
       >
-        <Text
+        <Box
           fontSize="16px"
           fontWeight="400"
           lineHeight="20px"
@@ -78,7 +82,7 @@ export const ChooseCards = (props: ChoseCardType) => {
           <Text color="#FF5ABB" display="inline-block">
             18 player cards.
           </Text>
-        </Text>
+        </Box>
         <Button
           padding="13px 40px"
           background="rgba(75, 165, 65, 0.89)"

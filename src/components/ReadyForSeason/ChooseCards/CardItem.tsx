@@ -1,23 +1,15 @@
-import {
-  Box,
-  Text,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Image,
-  background,
-} from "@chakra-ui/react";
+import { Box, Text, Card, CardBody, CardFooter, Image } from "@chakra-ui/react";
 
-import { StaticImageData } from "next/image";
+import CardItemProps from "assets/icons/card-active.svg";
 
-import CardItemProps  from "assets/icons/card-active.svg";
+import { IChooseCard } from "assets/types";
 
-import { CardPropsType } from "assets/types";
+type CardItemPropsType = {
+  card: IChooseCard;
+};
 
-
-export const CardItem = (props:CardPropsType) => {
-  const { card} = props;
+export const CardItem = (props: CardItemPropsType) => {
+  const { card } = props;
 
   return (
     <Card
@@ -30,7 +22,12 @@ export const CardItem = (props:CardPropsType) => {
       userSelect="none"
     >
       <CardBody padding="0px" position="relative">
-        <Image src={card.image.src} alt="card image" width="221px" />
+        <Image
+          src={card.image.src}
+          alt="card image"
+          width="100%"
+          backgroundSize="cover"
+        />
 
         {card.isAvailable && (
           <>
@@ -41,16 +38,16 @@ export const CardItem = (props:CardPropsType) => {
               bottom="0px"
               right="0px"
               display="block"
-              padding="1px 21px"
+              padding="5px 20px"
               color="#FFFFFF"
               fontSize="12px"
               fontWeight="600"
               textTransform="uppercase"
             >
-              you have {card.amount}
+              you have {card.count}
             </Text>
             <Box position={"absolute"} right={"12px"} top={"12px"}>
-              <CardItemProps  />
+              <CardItemProps />
             </Box>
           </>
         )}
@@ -58,12 +55,10 @@ export const CardItem = (props:CardPropsType) => {
       <CardFooter width="100%" padding="15px 0 35px">
         <Text
           fontSize="19px"
-          lineHeight="23px"
-          fontWeight={"500"}
+          fontWeight="500"
           textTransform="uppercase"
           color="#FFFFFF"
-          textAlign="center"
-          width="100%"
+          margin="auto"
         >
           {card.name}
         </Text>

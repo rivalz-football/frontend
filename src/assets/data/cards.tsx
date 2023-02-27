@@ -4,27 +4,27 @@ import {
   ProfessionalCard,
   SemiProCard,
 } from "assets/images";
-import {CardItemType, CardType} from "assets/types";
 
+import { IChooseCard, CardType } from "assets/types";
 
-export const cards: CardItemType[] = [
+export const cards: IChooseCard[] = [
   {
     image: BeginnerCard,
     name: CardType.BEGINNER,
     isAvailable: true,
-    amount: 2,
+    count: 2,
   },
-  { image: SemiProCard, name: CardType.SEMI_PRO, isAvailable: true, amount: 1 },
+  { image: SemiProCard, name: CardType.SEMI_PRO, isAvailable: true, count: 1 },
   {
     image: ProfessionalCard,
     name: CardType.PROFESSIONAL,
     isAvailable: false,
-    amount: 0,
+    count: 0,
   },
   {
     image: LegendaryCard,
     name: CardType.LEGENDARY,
     isAvailable: false,
-    amount: 0,
+    count: 0,
   },
 ];

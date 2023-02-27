@@ -28,3 +28,10 @@ export enum PlayerLocations {
   MIDFIELDER = "MIDFIELDER",
   FORWARD = "FORWARD",
 }
+
+export type IChooseCard = {
+  image: StaticImageData;
+  name: string;
+  isAvailable: boolean;
+  count: number;
+};

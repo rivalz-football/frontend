@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { Slide1 } from "./Slides";
+import { slides } from "./Slides";
 
 export const Banners = () => {
   return (
@@ -9,16 +9,18 @@ export const Banners = () => {
       slidesPerView={1}
       style={{ height: "250px", width: "100%" }}
       autoplay={{
-        delay: 3000,
+        delay: 5000,
       }}
       pagination={{
         clickable: true,
       }}
       navigation={true}
     >
-      <SwiperSlide>
-        <Slide1 />
-      </SwiperSlide>
+      {slides.map((Slide, index) => (
+        <SwiperSlide key={index}>
+          <Slide />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };
