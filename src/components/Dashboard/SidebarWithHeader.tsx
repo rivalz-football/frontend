@@ -37,7 +37,7 @@ interface SubMenuProps {
 
 interface MenuProps {
   name?: string;
-  children: SubMenuProps[];
+  items: SubMenuProps[];
 }
 
 interface BottomMenuProps {
@@ -46,7 +46,7 @@ interface BottomMenuProps {
 
 const menu: Array<MenuProps> = [
   {
-    children: [
+    items: [
       { name: "Home", url: "/", icon: <CategoryIcon /> },
       { name: "My Team", url: "/", icon: <BookmarkIcon /> },
       { name: "Fixtures", url: "/", icon: <CalendarIcon /> },
@@ -57,7 +57,7 @@ const menu: Array<MenuProps> = [
   },
   {
     name: "Rivalz Originals",
-    children: [
+    items: [
       { name: "Goal Flip", url: "/rivalz-originals", icon: <BallIcon /> },
       {
         name: "Corner Jackpo",
@@ -152,7 +152,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       </Flex>
       <Box>
         {menu.map((menu, index) => (
-          <MenuNavItem name={menu.name} children={menu.children} key={index} />
+          <MenuNavItem name={menu.name} items={menu.items} key={index} />
         ))}
 
         <Divider
@@ -173,7 +173,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 };
 
 const MenuNavItem = (props: MenuProps) => {
-  const { name, children } = props;
+  const { name, items } = props;
 
   return (
     <Box>
@@ -186,7 +186,7 @@ const MenuNavItem = (props: MenuProps) => {
           <Text>{name}</Text>
         </Box>
       )}
-      {children.map((child, index) => (
+      {items.map((child, index) => (
         <SubMenuNavItem
           key={index}
           icon={child.icon}
