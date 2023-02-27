@@ -87,7 +87,7 @@ export const ChooseCards = (props: ChoseCardType) => {
           padding="13px 40px"
           background="rgba(75, 165, 65, 0.89)"
           borderRadius="4px"
-          onClick={() => setStep(Step.CHOOSE_PLAYERS)}
+          onClick={() => setStep(Step.WAITING_ROOM)}
         >
           <Text
             fontSize="16px"
