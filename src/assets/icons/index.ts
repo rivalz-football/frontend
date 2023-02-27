@@ -7,6 +7,8 @@ import ChartIcon from "./chart.svg";
 import DocumentIcon from "./document.svg";
 import JackpotIcon from "./jackpot.svg";
 import DownArrowIcon from "./down-arrow.svg";
+import GiftIcon from "./gift.svg";
+import NotificationIcon from "./notification.svg";
 
 export {
   CategoryIcon,
@@ -18,4 +20,6 @@ export {
   DocumentIcon,
   JackpotIcon,
   DownArrowIcon,
+  GiftIcon,
+  NotificationIcon,
 };

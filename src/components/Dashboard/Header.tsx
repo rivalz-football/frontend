@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   DrawerCloseButton,
+  Flex,
   HStack,
   Menu,
   MenuButton,
@@ -10,39 +11,19 @@ import {
   MenuList,
   StatDownArrow,
 } from "@chakra-ui/react";
-import { DownArrowIcon } from "assets/icons";
+import { DownArrowIcon, GiftIcon, NotificationIcon } from "assets/icons";
+import { SolanaImage } from "assets/images";
+import { Notification } from "./Notification";
+import { UserAvatar } from "./UserAvatar";
+import { UserBalance } from "./UserBalance";
 
 export const Header = () => {
   return (
-    <Box>
-      {" "}
-      <Menu>
-        <MenuButton
-          transition="all 0.3s"
-          _focus={{ boxShadow: "none" }}
-          // background="rgba(11, 11, 11, 0.4)"
-          // border="1px solid rgba(245, 245, 245, 0.05)"
-          // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.35)"
-          borderRadius="6px"
-          padding="10px 20px"
-        >
-          <HStack>
-            <Avatar height="45px" width="45px" borderRadius="4px" />
-            <DownArrowIcon />
-          </HStack>
-        </MenuButton>
-        <MenuList
-          bg="rgba(11, 11, 11, 1)"
-          borderColor="#272B30"
-          padding="12px 16px 20px"
-          borderRadius="6px"
-        >
-          <MenuDivider />
-          <MenuItem background="transparent" fontSize="15px" fontWeight="600">
-            Logout
-          </MenuItem>
-        </MenuList>
-      </Menu>
-    </Box>
+    <Flex alignItems="center" gap="15px">
+      <UserBalance image={SolanaImage.src} name="$SOL" balance={123} />
+      <Notification count={4} countColor="#EC068D" icon={NotificationIcon} />
+      <Notification count={4} countColor="#D95543" icon={GiftIcon} />
+      <UserAvatar avatar="" />
+    </Flex>
   );
 };
