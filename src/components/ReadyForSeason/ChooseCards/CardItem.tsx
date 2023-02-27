@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Image, 
+  Image,
   background,
 } from "@chakra-ui/react";
 
@@ -34,14 +34,11 @@ export const CardItem = (props: CardItemType) => {
       filter={card.isAvailable ? "none" : "grayscale(50%)"}
       padding={"7px"}
       borderRadius={"0px"}
-
     >
       <CardBody padding={"0px"} position={"relative"}>
-        <Image src={card.img.src} alt={"card image"}
-       
-        width={"221px"}
-        />
-         <Text background={"rgba(9, 9, 9, 0.55);"}
+        <Image src={card.img.src} alt={"card image"} width={"221px"} />
+        <Text
+          background={"rgba(9, 9, 9, 0.55);"}
           border={"1px solid rgba(255, 255, 255, 0.02)"}
           position={"absolute"}
           bottom={"0px"}
@@ -50,22 +47,29 @@ export const CardItem = (props: CardItemType) => {
           padding={"1px 21px"}
           color={"#FFFFFF"}
           fontSize={"12px"}
-
           fontWeight={"600"}
           textTransform={"uppercase"}
-         >you have {card.amount} </Text>
-        {card.isAvailable && <Box position={"absolute"} right={"12px"} top={"12px"}><CardActive /></Box>}
+        >
+          you have {card.amount}{" "}
+        </Text>
+        {card.isAvailable && (
+          <Box position={"absolute"} right={"12px"} top={"12px"}>
+            <CardActive />
+          </Box>
+        )}
       </CardBody>
       <CardFooter width={"100%"} padding={"15px 0 35px"}>
         <Text
-         fontSize={"19px"}
+          fontSize={"19px"}
           lineHeight={"23px"}
-         fontWeight={"500"}
-         textTransform={"uppercase"}
+          fontWeight={"500"}
+          textTransform={"uppercase"}
           color={"#FFFFFF"}
           textAlign={"center"}
           width={"100%"}
-        >{card.name}</Text>
+        >
+          {card.name}
+        </Text>
       </CardFooter>
     </Card>
   );
