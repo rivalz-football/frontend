@@ -8,13 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { CardItem } from "./CardItem";
-export type CardItemType = {
-  image: StaticImageData;
-  name: string;
-  isAvailable: boolean;
-  amount: number;
-};
-
 import { cards } from "assets/data/cards";
 import { StaticImageData } from "next/image";
 import { Step } from "containers/Home";

@@ -4,20 +4,8 @@ import {
   ProfessionalCard,
   SemiProCard,
 } from "assets/images";
-import { StaticImageData } from "next/image";
-export type CardItemType = {
-  image: StaticImageData;
-  name: string;
-  isAvailable: boolean;
-  amount: number;
-};
+import {CardItemType, CardType} from "assets/types";
 
-enum CardType {
-  BEGINNER = "BEGINNER",
-  SEMI_PRO = "SEMI-PRO",
-  PROFESSIONAL = "PROFESSIONAL",
-  LEGENDARY = "LEGENDARY",
-}
 
 export const cards: CardItemType[] = [
   {

@@ -11,19 +11,13 @@ import {
 
 import { StaticImageData } from "next/image";
 
-import CardActive from "assets/icons/card-active.svg";
+import CardItemProps  from "assets/icons/card-active.svg";
 
-export type CardItemType = {
-  card: {
-    image: StaticImageData;
-    name: string;
-    isAvailable: boolean;
-    amount: number;
-  };
-};
+import { CardPropsType } from "assets/types";
 
-export const CardItem = (props: CardItemType) => {
-  const { card } = props;
+
+export const CardItem = (props:CardPropsType) => {
+  const { card} = props;
 
   return (
     <Card
@@ -56,7 +50,7 @@ export const CardItem = (props: CardItemType) => {
               you have {card.amount}
             </Text>
             <Box position={"absolute"} right={"12px"} top={"12px"}>
-              <CardActive />
+              <CardItemProps  />
             </Box>
           </>
         )}
