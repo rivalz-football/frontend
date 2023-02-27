@@ -29,8 +29,8 @@ export const HomeContainer = () => {
   const CurrentComponent = componentsForReady[step];
 
   return (
-    <BlankLayout>
-      <CurrentComponent setStep={setStep} />
+    <BlankLayout >
+      <CurrentComponent setStep={setStep}/>
     </BlankLayout>
   );
 };
