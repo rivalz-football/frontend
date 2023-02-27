@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import {
   IconButton,
   Avatar,
@@ -12,8 +12,9 @@ import {
   BoxProps,
   FlexProps,
   Divider,
+  SlideFade,
 } from "@chakra-ui/react";
-import { SIDEBAR_WIDTH } from "assets/data";
+import { SIDEBAR_WIDTH_FULL, SIDEBAR_WIDTH_SMALL } from "assets/data";
 
 import NextLink from "next/link";
 import { Logo } from "components/common/Logo";
@@ -28,6 +29,7 @@ import {
   JackpotIcon,
 } from "assets/icons";
 import { Header } from "./Header";
+import { useSidebar } from "components/contexts/useSidebarToggle";
 
 interface SubMenuProps {
   name: string;
@@ -88,11 +90,17 @@ const bottomMenu: BottomMenuProps[] = [
 
 export const HeaderWithSidebar = ({ children }: { children: ReactNode }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { menuWidth } = useSidebar();
   return (
     <Box bg="#0E0D10" maxHeight="100%" overflow="auto" height="100%">
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
+        transition="all 0.5s ease-in-out"
+        w={{
+          base: "full",
+          md: menuWidth,
+        }}
       />
       <Drawer
         autoFocus={false}
@@ -110,9 +118,10 @@ export const HeaderWithSidebar = ({ children }: { children: ReactNode }) => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box
-        ml={{ base: 0, md: `calc(${SIDEBAR_WIDTH})` }}
+        ml={{ base: 0, md: `calc(${menuWidth})` }}
         p="4"
         background="#0E0D10"
+        transition="all 0.5s ease-in-out"
       >
         {children}
       </Box>
@@ -125,13 +134,13 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const { isSidebarOpen } = useSidebar();
   return (
     <Box
       bg="rgba(11, 11, 11, 0.4)"
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.35)"
       borderRight="1px"
       borderRightColor="rgba(35, 35, 35, 0.25)"
-      w={{ base: "full", md: SIDEBAR_WIDTH }}
       pos="fixed"
       height="100%"
       overflow="auto"
@@ -147,7 +156,6 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <NextLink href="/dashboard">
           <Logo />
         </NextLink>
-
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       <Box>
@@ -160,7 +168,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           background="linear-gradient(90deg, rgba(35, 35, 35, 0.85) 0%, rgba(35, 35, 35, 0) 100%)"
           width="70%"
         />
-        <Flex direction="column" padding="0 25px" gap="10px">
+
+        <Flex
+          direction="column"
+          padding="0 25px"
+          gap="10px"
+          display={`${isSidebarOpen ? "block" : "none"}`}
+        >
           {bottomMenu.map((menu, index) => (
             <Text key={index} fontWeight="500" fontSize="14px" color="#90909C">
               {menu.name}
@@ -174,6 +188,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 const MenuNavItem = (props: MenuProps) => {
   const { name, items } = props;
+  const { isSidebarOpen } = useSidebar();
 
   return (
     <Box>
@@ -183,7 +198,7 @@ const MenuNavItem = (props: MenuProps) => {
           padding="15px 25px"
           my="20px"
         >
-          <Text>{name}</Text>
+          <Text display={`${isSidebarOpen ? "block" : "none"}`}>{name}</Text>
         </Box>
       )}
       {items.map((child, index) => (
@@ -200,11 +215,13 @@ const MenuNavItem = (props: MenuProps) => {
 
 const SubMenuNavItem = (props: SubMenuProps) => {
   const { name, icon, url } = props;
+  const { isSidebarOpen } = useSidebar();
 
   return (
     <Flex
       alignItems="center"
-      padding="5px 25px"
+      padding={`${isSidebarOpen ? "5px 25px" : "5px 5px"}`}
+      justifyContent={`${isSidebarOpen ? "flex-start" : "center"}`}
       gap="25px"
       cursor="pointer"
       _hover={{
@@ -223,14 +240,12 @@ const SubMenuNavItem = (props: SubMenuProps) => {
         _hover={{
           background: "none",
         }}
-        // sx={{
-        //   svg: {
-        //     fill: "white",
-        //     color: "white",
-        //   },
-        // }}
       />
-      <Text color="#90909C" fontSize="15px">
+      <Text
+        color="#90909C"
+        fontSize="15px"
+        display={`${isSidebarOpen ? "block" : "none"}`}
+      >
         {name}
       </Text>
     </Flex>
@@ -241,14 +256,17 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { menuWidth } = useSidebar();
+
   return (
     <Flex
-      ml={{ base: 0, md: SIDEBAR_WIDTH }}
+      ml={{ base: 0, md: menuWidth }}
       px={{ base: 5, md: 4 }}
       height="20"
       alignItems="center"
       gap="20px"
-      justifyContent={{ base: "flex-start", md: "flex-end" }}
+      justifyContent={{ base: "flex-start", md: "space-between" }}
+      transition="all 0.5s ease-in-out"
       {...rest}
     >
       <Header />

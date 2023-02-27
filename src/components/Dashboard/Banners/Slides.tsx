@@ -4,6 +4,9 @@ const Slide1 = () => {
   return (
     <Box
       background={`linear-gradient(82.17deg, #0D0C11 5.36%, rgba(14, 12, 17, 0) 87.52%), url(https://i.imgur.com/gcfatGO.jpg)`}
+      backgroundRepeat="no-repeat"
+      backgroundSize="cover"
+      width="100%"
       height="250px"
       display="flex"
       flexDirection="column"
@@ -44,6 +47,9 @@ const Slide2 = () => {
   return (
     <Box
       background={`linear-gradient(82.17deg, #0D0C11 5.36%, rgba(14, 12, 17, 0) 87.52%), url(https://i.imgur.com/gcfatGO.jpg)`}
+      backgroundRepeat="no-repeat"
+      backgroundSize="cover"
+      width="100%"
       height="250px"
       display="flex"
       flexDirection="column"
