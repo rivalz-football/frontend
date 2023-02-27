@@ -1,9 +1,11 @@
+import { Banners } from "components/Dashboard/Banners";
 import { DashboardLayout } from "layouts/Dashboard";
 
 export const DashboardContainer = () => {
   return (
     <DashboardLayout>
-      <div>Dashboard</div>
+      {/* Banners Area */}
+      <Banners />
     </DashboardLayout>
   );
 };

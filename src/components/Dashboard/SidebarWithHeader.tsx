@@ -110,9 +110,8 @@ export const HeaderWithSidebar = ({ children }: { children: ReactNode }) => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box
-        ml={{ base: 0, md: `calc(${SIDEBAR_WIDTH} + 50px)` }}
+        ml={{ base: 0, md: `calc(${SIDEBAR_WIDTH})` }}
         p="4"
-        maxW="1200px"
         background="#0E0D10"
       >
         {children}
