@@ -4,6 +4,7 @@ import ProfessionalCard from "assets/images/professional-card.png";
 import LegendaryCard from "assets/images/legendary-card.png";
 import LogoImage from "./logo.png";
 import SolanaImage from "./solana.png";
+import FirstPageBanner from "./first-page-banner.png";
 
 export {
   BeginnerCard,
@@ -12,4 +13,5 @@ export {
   LegendaryCard,
   LogoImage,
   SolanaImage,
+  FirstPageBanner,
 };
