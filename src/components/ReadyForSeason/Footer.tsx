@@ -3,8 +3,7 @@ import { Box, Flex, Link, Text } from "@chakra-ui/react";
 export const Footer = () => {
   return (
     <Flex
-      position="absolute"
-      color="white"
+      position="relative"
       bottom="10px"
       width="100%"
       fontSize="15px"
