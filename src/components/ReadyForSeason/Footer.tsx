@@ -4,8 +4,8 @@ export const Footer = () => {
   return (
     <Flex
       position="absolute"
-      bottom="30px"
       color="white"
+      bottom="10px"
       width="100%"
       fontSize="15px"
       px={{ base: "0px", md: "50px" }}
@@ -16,6 +16,11 @@ export const Footer = () => {
       gap={{
         base: "20px",
       }}
+      justifyContent={{
+        base: "center",
+        md: "space-between",
+      }}
+      marginTop="20px"
     >
       <Flex
         direction={{

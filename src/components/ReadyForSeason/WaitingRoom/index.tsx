@@ -35,6 +35,7 @@ export const WaitingRoom = (props: WaitingRoomType) => {
       flexDirection="column"
       alignItems="center"
       maxWidth="container.md"
+      padding="0"
     >
       <Text
         fontSize="24px"
@@ -59,7 +60,10 @@ export const WaitingRoom = (props: WaitingRoomType) => {
         flexDirection="column"
         alignItems="flex-end"
         marginTop="23px"
-        lineHeight="45px"
+        lineHeight={{
+          base: "23px",
+          md: "45px",
+        }}
       >
         <Text
           fontSize="22px"
@@ -148,7 +152,10 @@ const RendererCountdown = ({
   return (
     <Text
       display="block"
-      fontSize="69px"
+      fontSize={{
+        base: "30px",
+        md: "70px",
+      }}
       fontWeight="500"
       opacity="0.9"
       textTransform="uppercase"
