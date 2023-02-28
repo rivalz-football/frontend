@@ -1,5 +1,5 @@
-import { DashboardContainer } from "containers/Dashboard";
+import { TeamCenterContainer } from "containers/TeamCenter";
 
 export default function Dashboard() {
-  return <DashboardContainer />;
+  return <TeamCenterContainer />;
 }
