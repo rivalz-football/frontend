@@ -5,8 +5,8 @@ import { useSidebar } from "contexts/useSidebarToggle";
 export const Logo = () => {
   const { isSidebarOpen } = useSidebar();
   return (
-    <Flex gap="15px" alignItems="center" width="30px" height="35px">
-      <Image src={LogoImage.src} alt="logo" />
+    <Flex gap="15px" alignItems="center">
+      <Image src={LogoImage.src} alt="logo" width="30px" height="35px" />
       {isSidebarOpen && (
         <Text fontSize="21px" fontWeight="500" letterSpacing="0.08em">
           RivalZ

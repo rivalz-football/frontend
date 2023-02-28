@@ -1,16 +1,18 @@
 import "assets/styles/style.scss";
 import "swiper/css";
 import type { AppProps } from "next/app";
-import { ChakraProvider } from "@chakra-ui/react";
-import { theme } from "theme";
+
 import { SidebarToggle } from "contexts/useSidebarToggle";
+import { Chakra } from "plugins/Chakra";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider theme={theme}>
+    <Chakra cookies={pageProps.cookies}>
       <SidebarToggle>
         <Component {...pageProps} />
       </SidebarToggle>
-    </ChakraProvider>
+    </Chakra>
   );
 }
+
+export { getServerSideProps } from "plugins/Chakra";
