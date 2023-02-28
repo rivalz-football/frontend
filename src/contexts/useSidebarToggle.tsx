@@ -13,8 +13,8 @@ const SidebarContext = createContext<SidebarToggleContextData>(
 
 export const SidebarToggle = (props: PropsWithChildren) => {
   const { children } = props;
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [menuWidth, setMenuWidth] = useState(SIDEBAR_WIDTH_SMALL);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [menuWidth, setMenuWidth] = useState(SIDEBAR_WIDTH_FULL);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);

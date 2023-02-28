@@ -1,5 +1,8 @@
 import {
+  Box,
+  Button,
   Container,
+  Grid,
   Tab,
   TabList,
   TabPanel,
@@ -7,6 +10,9 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
+
+import { PlayerCard } from "./PlayerCard";
+import { PlayerLocations } from "assets/types";
 
 export const ChoosePlayers = () => (
   <>
@@ -39,31 +45,110 @@ export const ChoosePlayers = () => (
         <br /> Note that there is a minimum number of players you must select
         from each region
       </Text>
-      <Tabs>
+      <Tabs variant="soft-rounded">
         <TabList
+          display="flex"
+          justifyContent="center"
+          paddingTop="40px"
           fontSize="17px"
           lineHeight="22px"
           fontWeight="600"
           color="#FFFFFF"
+          gap="161px"
         >
-          <Tab>Goalkeepers</Tab>
-          <Tab>Defenders</Tab>
-          <Tab>Midfielders</Tab>
-          <Tab>Forwards</Tab>
+          {Object.values(PlayerLocations).map((location, index) => (
+            <Tab key={index} _selected={{ bg: "none", color: "#EC068D" }}>
+              {location}
+            </Tab>
+          ))}
         </TabList>
+        <Box
+          padding={["0", "0", "0", "40px"]}
+          display="flex"
+          justifyContent="space-between"
+        >
+          <Box>
+            <Text color="#54C748">You have selected 1 Goalkeepers card</Text>
+            <Text color="#D95543">
+              *You should choose at least 1 Goalkeeper card
+            </Text>
+          </Box>
+          <Button
+            bg=" rgba(75, 165, 65, 0.6);"
+            textTransform="uppercase"
+            borderRadius="none"
+          >
+            confirm Goalkeepers cards
+          </Button>
+        </Box>
 
-        <TabPanels>
-          <TabPanel>
-            <p>Goalkeepers</p>
+        <TabPanels justifyContent="center">
+          <TabPanel display="flex" justifyContent="center">
+            <Grid
+              templateColumns={{
+                base: "repeat(2, 1fr)",
+                md: "repeat(4, 1fr)",
+              }}
+              gap={4}
+              justifyContent="center"
+              height="1334px"
+              overflow="scroll"
+            >
+              {[...Array(200)].map((_, i) => (
+                <PlayerCard key={i} />
+              ))}
+            </Grid>
           </TabPanel>
           <TabPanel>
-            <p>Defenders!</p>
+            <Grid
+              templateColumns={{
+                base: "repeat(2, 1fr)",
+                md: "repeat(4, 1fr)",
+              }}
+              gap={4}
+              justifyContent="center"
+            >
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+            </Grid>
           </TabPanel>
           <TabPanel>
-            <p>Midfielders!</p>
+            <Grid
+              templateColumns={{
+                base: "repeat(2, 1fr)",
+                md: "repeat(4, 1fr)",
+              }}
+              gap={4}
+              justifyContent="center"
+            >
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+            </Grid>
           </TabPanel>
           <TabPanel>
-            <p>Forwads!</p>
+            <Grid
+              templateColumns={{
+                base: "repeat(2, 1fr)",
+                md: "repeat(4, 1fr)",
+              }}
+              gap={4}
+              justifyContent="center"
+            >
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+              <PlayerCard />
+            </Grid>
           </TabPanel>
         </TabPanels>
       </Tabs>

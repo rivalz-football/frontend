@@ -18,7 +18,7 @@ import {
   NotificationIcon,
 } from "assets/icons";
 import { SolanaImage } from "assets/images";
-import { useSidebar } from "components/contexts/useSidebarToggle";
+import { useSidebar } from "contexts/useSidebarToggle";
 import { useEffect } from "react";
 import { Notification } from "./Notification";
 import { UserAvatar } from "./UserAvatar";

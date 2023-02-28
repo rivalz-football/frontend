@@ -1,20 +1,5 @@
 import { StaticImageData } from "next/image";
 
-export type CardItemType = {
-  image: StaticImageData;
-  name: string;
-  isAvailable: boolean;
-  amount: number;
-};
-export type CardPropsType = {
-  card: {
-    image: StaticImageData;
-    name: string;
-    isAvailable: boolean;
-    amount: number;
-  };
-};
-
 export enum CardType {
   BEGINNER = "BEGINNER",
   SEMI_PRO = "SEMI-PRO",
@@ -34,4 +19,76 @@ export type IChooseCard = {
   name: string;
   isAvailable: boolean;
   count: number;
+};
+
+/* LEADERBOARD TYPO */
+export type ILeaderboardUser = {
+  name: string;
+  point: number;
+  rank: number;
+};
+
+export type ILeaderboard = {
+  others: ILeaderboardUser[];
+  me: ILeaderboardUser;
+};
+
+type ILeaderboardColor = {
+  [key: number]: string;
+};
+
+export const LeaderboardUserColor: ILeaderboardColor = {
+  1: "#EC068D",
+  2: "#A60A47",
+  3: "#600001",
+  4: "#6A6C69",
+  5: "#6A6C69",
+};
+
+/* top player of week */
+export type IPlayerOfWeek = {
+  name: string;
+  lastName: string;
+  position: string;
+  image: string;
+  score: number;
+};
+
+/* Transfer Histories */
+export type ITransferHistory = {
+  username: string;
+  playerName: string;
+};
+
+export type IActivityHistory = {
+  username: string;
+  playerName: string;
+  box: string;
+  playerColor: string;
+};
+
+interface NavItem {
+  label: string;
+  subLabel?: string;
+  children?: Array<NavItem>;
+  href?: string;
+}
+
+export type IWizardForSeasonHeader = {
+  label: string;
+  href: string;
+};
+
+export type PlayerCardType = {
+  id: number;
+  location: string;
+  locationActve: boolean;
+  cardIsAvailable: boolean;
+  playerName: string;
+  image: StaticImageData;
+  isSelect: boolean;
+};
+
+export type PlayerCardPropsType = {
+  player: PlayerCardType;
 };

@@ -3,28 +3,51 @@ import { Box, Flex, Link, Text } from "@chakra-ui/react";
 export const Footer = () => {
   return (
     <Flex
-      position="fixed"
+      position="absolute"
       bottom="30px"
-      flex={1}
       color="white"
       width="100%"
       fontSize="15px"
       px={{ base: "0px", md: "50px" }}
+      direction={{
+        base: "column",
+        md: "row",
+      }}
+      gap={{
+        base: "20px",
+      }}
     >
-      <Box display="flex" width="100%">
-        <Box display="flex">
-          <Link marginRight="110px">Game Rules</Link>
-          <Link marginRight="110px">Teams & Canditions</Link>
-          <Link marginRight="110px">Privacy Policy</Link>
-        </Box>
-        <Text ml="auto">© 2023 RivalZ ~ Build with</Text>
+      <Flex
+        direction={{
+          base: "column",
+          md: "row",
+        }}
+        gap={{
+          base: "5px",
+          md: "50px",
+        }}
+      >
+        <Link>Game Rules</Link>
+        <Link>Teams & Canditions</Link>
+        <Link>Privacy Policy</Link>
+      </Flex>
+      <Box
+        ml={{
+          base: "0px",
+          md: "auto",
+        }}
+      >
+        <Text fontSize="15px" display="inline-block">
+          © 2023 RivalZ ~ Build with&nbsp;
+        </Text>
         <Text
-          marginLeft="10px"
           sx={{
-            background: "linear-gradient(90deg,#833ab4,#fd1d1d 50%,#fcb045)",
+            background: "linear-gradient(270deg, #F232A3 0%, #7F52FF 20.49%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
+          fontWeight="600"
+          display="inline-block"
         >
           Solana
         </Text>

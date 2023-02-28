@@ -29,7 +29,7 @@ import {
   JackpotIcon,
 } from "assets/icons";
 import { Header } from "./Header";
-import { useSidebar } from "components/contexts/useSidebarToggle";
+import { useSidebar } from "contexts/useSidebarToggle";
 
 interface SubMenuProps {
   name: string;
