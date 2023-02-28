@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Flex,
   Menu,
@@ -14,9 +15,10 @@ import ArrowDownIcon from "assets/icons/arrow-down.svg";
 import ArrowUpIcon from "assets/icons/arrow-up.svg";
 
 import { Step } from "containers/Home";
-import { PlayerLocations } from "assets/types";
-import { PlayerCard } from "components/ReadyForSeason/PlayerCard";
-// import { PlayerCards } from "assets/data/playerCards";
+import { PlayerPosition } from "assets/types";
+import { PlayerCards } from "assets/data/playerCards";
+import { PlayerCard } from "components/common/PlayerCard";
+
 type WaitingRoomType = {
   setStep: (step: Step) => void;
 };
@@ -34,7 +36,7 @@ export const WaitingRoom = (props: WaitingRoomType) => {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      maxWidth="container.md"
+      maxWidth="container.lg"
       padding="0"
     >
       <Text
@@ -81,8 +83,8 @@ export const WaitingRoom = (props: WaitingRoomType) => {
         />
       </Flex>
       <Flex
-        justifyContent={{ base: "center", md: "space-between" }}
-        flexDirection={{ base: "column", md: "row" }}
+        justifyContent="space-between"
+        flexDirection="row"
         alignItems="center"
         width="100%"
         marginTop="40px"
@@ -117,7 +119,7 @@ export const WaitingRoom = (props: WaitingRoomType) => {
             </Flex>
           </MenuButton>
           <MenuList background="#1A1A1A">
-            {Object.values(PlayerLocations).map((location, index) => (
+            {Object.values(PlayerPosition).map((location, index) => (
               <MenuItem background="#1A1A1A" key={index}>
                 {location}
               </MenuItem>
@@ -125,12 +127,37 @@ export const WaitingRoom = (props: WaitingRoomType) => {
           </MenuList>
         </Menu>
       </Flex>
-      {/* Barisin bana yazdığı kart componenti */}
-      {/* <SimpleGrid column={3} gap={6} marginTop="40px">
+
+      <SimpleGrid
+        templateColumns={{
+          base: "repeat(2, 1fr)",
+          md: "repeat(4, 1fr)",
+        }}
+        gap={4}
+        justifyContent="center"
+        marginTop="27px"
+        height="762px"
+        overflowY="scroll"
+        padding="15px"
+      >
         {PlayerCards.map((player, index) => (
-          <PlayerCard key={index} player={player} />
+          <PlayerCard key={index} player={player} isSelectable={false} />
         ))}
-      </SimpleGrid> */}
+      </SimpleGrid>
+      <Button
+        display="flex"
+        background="rgba(75, 165, 65, 0.89)"
+        color="#FFFFFF"
+        minWidth="100%"
+        padding="16px 0"
+        textTransform="uppercase"
+        fontWeight="700"
+        fontSize="19px"
+        lineHeight="24px"
+        marginTop="30px"
+      >
+        GO TO TEAM CENTER
+      </Button>
     </Container>
   );
 };

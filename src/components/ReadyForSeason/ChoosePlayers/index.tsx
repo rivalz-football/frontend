@@ -11,15 +11,21 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { PlayerCard } from "./PlayerCard";
-import { PlayerLocations } from "assets/types";
+import { PlayerCard } from "../../common/PlayerCard";
+import { PlayerPosition } from "assets/types";
 
 // kart secimi icin gerekli olan datalar componente aktar
 import { PlayerCards } from "assets/data/playerCards";
 import { useState } from "react";
+import { Step } from "containers/Home";
+type ChosePlayerType = {
+  setStep: (step: Step) => void;
+};
 
-export const ChoosePlayers = () => {
+export const ChoosePlayers = (props: ChosePlayerType) => {
   const [count, setcount] = useState(0);
+  const { setStep } = props;
+
   return (
     <>
       <Container
@@ -62,7 +68,7 @@ export const ChoosePlayers = () => {
             color="#FFFFFF"
             gap="161px"
           >
-            {Object.values(PlayerLocations).map((location, index) => (
+            {Object.values(PlayerPosition).map((location, index) => (
               <Tab key={index} _selected={{ bg: "none", color: "#EC068D" }}>
                 {location}
               </Tab>
@@ -83,6 +89,7 @@ export const ChoosePlayers = () => {
               bg=" rgba(75, 165, 65, 0.6);"
               textTransform="uppercase"
               borderRadius="none"
+              onClick={() => setStep(Step.WAITING_ROOM)}
             >
               confirm Goalkeepers cards
             </Button>
@@ -106,6 +113,7 @@ export const ChoosePlayers = () => {
                     player={player}
                     setcount={setcount}
                     count={count}
+                    isSelectable={true}
                   />
                 ))}
               </Grid>
@@ -125,6 +133,7 @@ export const ChoosePlayers = () => {
                     player={player}
                     setcount={setcount}
                     count={count}
+                    isSelectable={true}
                   />
                 ))}
               </Grid>
@@ -144,6 +153,7 @@ export const ChoosePlayers = () => {
                     player={player}
                     setcount={setcount}
                     count={count}
+                    isSelectable={true}
                   />
                 ))}
               </Grid>
@@ -163,6 +173,7 @@ export const ChoosePlayers = () => {
                     player={player}
                     setcount={setcount}
                     count={count}
+                    isSelectable={true}
                   />
                 ))}
               </Grid>
