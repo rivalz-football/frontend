@@ -83,6 +83,9 @@ export const ChoosePlayers = () => {
               bg=" rgba(75, 165, 65, 0.6);"
               textTransform="uppercase"
               borderRadius="none"
+              onClick={() => {
+                console.log("confirm Goalkeepers cards", count);
+              }}
             >
               confirm Goalkeepers cards
             </Button>

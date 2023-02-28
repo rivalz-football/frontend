@@ -6,14 +6,14 @@ export const PlayerCards: PlayerCardType[] = [
     id: 121212,
     playerName: "Lionel Messi",
     location: PlayerLocations.FORWARD,
-    isSelect: true,
+    isSelect: false,
     cardIsAvailable: true,
   },
   {
     id: 121213,
     playerName: "Cristiano Ronaldo",
     location: PlayerLocations.FORWARD,
-    isSelect: true,
+    isSelect: false,
     cardIsAvailable: true,
   },
   {

@@ -12,6 +12,12 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
 
   const handleClick = () => {
     setIsSelect(!isSelect);
+    if (isSelect === false) {
+      props.setcount(props.count + 1);
+    }
+    if (isSelect === true) {
+      props.setcount(props.count - 1);
+    }
   };
 
   return (
@@ -23,9 +29,6 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
       onClick={() => {
         console.log("click");
         handleClick();
-        if (isSelect) props.setcount(props.count - 1);
-        else props.setcount(props.count + 1);
-        console.log(props.count);
       }}
     >
       <Box
