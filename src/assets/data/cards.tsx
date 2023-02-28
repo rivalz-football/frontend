@@ -14,7 +14,12 @@ export const cards: IChooseCard[] = [
     isAvailable: true,
     count: 2,
   },
-  { image: SemiProCard, name: CardType.SEMI_PRO, isAvailable: true, count: 1 },
+  {
+    image: SemiProCard,
+    name: CardType.SEMI_PRO,
+    isAvailable: true,
+    count: 1,
+  },
   {
     image: ProfessionalCard,
     name: CardType.PROFESSIONAL,

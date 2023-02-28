@@ -14,6 +14,7 @@ import {
   Collapse,
   useBreakpointValue,
 } from "@chakra-ui/react";
+
 import Head from "next/head";
 import { Logo } from "../common/Logo";
 import {
