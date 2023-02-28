@@ -57,7 +57,7 @@ export const WaitingRoom = (props: WaitingRoomType) => {
         flexDirection="column"
         alignItems="flex-end"
         marginTop="23px"
-        lineHeight="65px"
+        lineHeight="45px"
       >
         <Text
           fontSize="22px"
