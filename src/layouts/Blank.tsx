@@ -4,14 +4,20 @@ import { Header } from "components/ReadyForSeason/Header";
 
 export const BlankLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Box padding="30px" minHeight="100vh">
+    <Box
+      padding="30px"
+      minHeight="100vh"
+      overflowX="hidden"
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+    >
       <Header />
       <Box
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        padding="50px 10px 100px 10px"
       >
         {children}
       </Box>

@@ -14,6 +14,10 @@ export const Header = () => {
         base: "0px",
         md: "200px",
       }}
+      justifyContent={{
+        base: "center",
+        md: "space-between",
+      }}
     >
       <Logo />
 
@@ -27,7 +31,15 @@ const DesktopNav = () => {
   const linkHoverColor = "purple.400";
 
   return (
-    <Stack direction="row" gap="50px">
+    <Stack
+      direction="row"
+      width="100%"
+      gap="50px"
+      display={{
+        base: "none",
+        md: "flex",
+      }}
+    >
       {wizardForSeasonHeader.map((navItem, index) => (
         <Link
           p={2}

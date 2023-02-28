@@ -13,9 +13,8 @@ export const Login = (props: LoginType) => {
   return (
     <Flex
       direction="column"
-      justifyContent="center"
+      justifyContent="space-between"
       alignItems="center"
-      margin="auto"
       gap="35px"
       height={`calc(100vh - (${HEADER_HEIGHT} + ${FOOTER_HEIGHT} + 150px))`}
     >
@@ -44,8 +43,9 @@ export const Login = (props: LoginType) => {
         backgroundSize="cover"
         opacity="0.4"
         mixBlendMode="overlay"
-        maxHeight="100vh"
+        height="100%"
         width="100%"
+        backgroundPosition="center"
       />
     </Flex>
   );
