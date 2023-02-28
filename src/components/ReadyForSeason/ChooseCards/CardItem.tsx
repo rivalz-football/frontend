@@ -46,7 +46,12 @@ export const CardItem = (props: CardItemPropsType) => {
             >
               you have {card.count}
             </Text>
-            <Box position={"absolute"} right={"12px"} top={"12px"}>
+            <Box
+              position={"absolute"}
+              right={"12px"}
+              top={"12px"}
+              backgroundColor="blue"
+            >
               <CardItemProps />
             </Box>
           </>

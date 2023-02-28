@@ -82,13 +82,13 @@ export type IWizardForSeasonHeader = {
 export type PlayerCardType = {
   id: number;
   location: string;
-  locationActve: boolean;
   cardIsAvailable: boolean;
   playerName: string;
-  image: StaticImageData;
   isSelect: boolean;
 };
 
 export type PlayerCardPropsType = {
   player: PlayerCardType;
+  count: number;
+  setcount: (count: number) => void;
 };
