@@ -14,10 +14,8 @@ export const Header = () => {
         base: "0px",
         md: "200px",
       }}
-      justifyContent={{
-        base: "center",
-        md: "space-between",
-      }}
+      width="100%"
+      justifyContent="center"
     >
       <Logo />
 

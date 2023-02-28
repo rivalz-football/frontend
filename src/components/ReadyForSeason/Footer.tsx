@@ -3,9 +3,10 @@ import { Box, Flex, Link, Text } from "@chakra-ui/react";
 export const Footer = () => {
   return (
     <Flex
-      position="relative"
+      position="absolute"
       color="white"
-      width="calc(100vw - 60px)"
+      bottom="10px"
+      width="100%"
       fontSize="15px"
       px={{ base: "0px", md: "50px" }}
       direction={{
@@ -35,8 +36,13 @@ export const Footer = () => {
         <Link>Teams & Canditions</Link>
         <Link>Privacy Policy</Link>
       </Flex>
-      <Flex position={{ base: "static", md: "absolute" }} right="30px">
-        <Text fontSize="15px" display="block">
+      <Box
+        ml={{
+          base: "0px",
+          md: "auto",
+        }}
+      >
+        <Text fontSize="15px" display="inline-block">
           © 2023 RivalZ ~ Build with&nbsp;
         </Text>
         <Text
@@ -50,7 +56,7 @@ export const Footer = () => {
         >
           Solana
         </Text>
-      </Flex>
+      </Box>
     </Flex>
   );
 };

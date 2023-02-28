@@ -13,7 +13,7 @@ export const Login = (props: LoginType) => {
   return (
     <Flex
       direction="column"
-      justifyContent="space-between"
+      justifyContent="center"
       alignItems="center"
       gap="35px"
       height={`calc(100vh - (${HEADER_HEIGHT} + ${FOOTER_HEIGHT} + 150px))`}
