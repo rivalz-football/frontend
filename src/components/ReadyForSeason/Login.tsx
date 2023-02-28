@@ -21,8 +21,8 @@ export const Login = (props: LoginType) => {
     >
       <Image src={LoginImage.src} alt="login-image" />
       <Text fontSize="18px">
-        Build your team, make transfers and earn points based on your players'
-        real-life performances
+        Build your team, make transfers and earn points based on your
+        players&apos; real-life performances
       </Text>
 
       <Button
