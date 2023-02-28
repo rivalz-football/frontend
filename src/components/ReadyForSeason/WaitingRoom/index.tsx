@@ -16,7 +16,7 @@ import ArrowUpIcon from "assets/icons/arrow-up.svg";
 import { Step } from "containers/Home";
 import { PlayerLocations } from "assets/types";
 import { PlayerCard } from "components/ReadyForSeason/PlayerCard";
-import { PlayerCards } from "assets/data/playerCards";
+// import { PlayerCards } from "assets/data/playerCards";
 type WaitingRoomType = {
   setStep: (step: Step) => void;
 };
@@ -121,11 +121,12 @@ export const WaitingRoom = (props: WaitingRoomType) => {
           </MenuList>
         </Menu>
       </Flex>
-      <SimpleGrid column={3} gap={6} marginTop="40px">
+      {/* Barisin bana yazdığı kart componenti */}
+      {/* <SimpleGrid column={3} gap={6} marginTop="40px">
         {PlayerCards.map((player, index) => (
           <PlayerCard key={index} player={player} />
         ))}
-      </SimpleGrid>
+      </SimpleGrid> */}
     </Container>
   );
 };

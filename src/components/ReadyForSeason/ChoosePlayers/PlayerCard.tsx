@@ -3,9 +3,31 @@ import { PlayerBackgroundImage } from "assets/images";
 import { RivalZ } from "assets/images";
 import CardSelectedIcon from "assets/icons/card-selected-icon.svg";
 
-export const PlayerCard = () => {
+// cardatası
+import { PlayerCardPropsType } from "assets/types";
+import { useState } from "react";
+
+export const PlayerCard = (props: PlayerCardPropsType) => {
+  const [isSelect, setIsSelect] = useState(props.player.isSelect);
+
+  const handleClick = () => {
+    setIsSelect(!isSelect);
+  };
+
   return (
-    <Box p={4} display="flex" justifyContent="center" cursor="pointer">
+    <Box
+      p={4}
+      display="flex"
+      justifyContent="center"
+      cursor="pointer"
+      onClick={() => {
+        console.log("click");
+        handleClick();
+        if (isSelect) props.setcount(props.count - 1);
+        else props.setcount(props.count + 1);
+        console.log(props.count);
+      }}
+    >
       <Box
         w="235px"
         h="320px"
@@ -18,18 +40,18 @@ export const PlayerCard = () => {
           position="absolute"
           right="12px"
           top="12px"
-          filter="grayscale(100%)"
+          filter={isSelect ? "none" : "grayscale(100%)"}
         >
           <CardSelectedIcon />
         </Box>
         <Image
           src={RivalZ.src}
-          alt="RivalZ"
+          alt="cardlogo"
           position="absolute"
           top="50%"
           left="50%"
           transform="translate(-50%, -50%)"
-          filter="grayscale(100%)"
+          filter={isSelect ? "none" : "grayscale(100%)"}
         />
       </Box>
     </Box>
