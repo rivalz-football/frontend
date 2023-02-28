@@ -11,7 +11,11 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
   const [isSelect, setIsSelect] = useState(props.player.isSelect);
 
   const handleClick = () => {
-    setIsSelect(!isSelect);
+    if (props.isSelectable) setIsSelect(!isSelect);
+    if (!props.setcount || !props.count) return;
+    if (isSelect) props.setcount(props.count - 1);
+    else props.setcount(props.count + 1);
+    console.log(props.count);
   };
 
   return (
@@ -23,9 +27,6 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
       onClick={() => {
         console.log("click");
         handleClick();
-        if (isSelect) props.setcount(props.count - 1);
-        else props.setcount(props.count + 1);
-        console.log(props.count);
       }}
     >
       <Box

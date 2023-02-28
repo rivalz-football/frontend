@@ -7,7 +7,7 @@ export enum CardType {
   LEGENDARY = "LEGENDARY",
 }
 
-export enum PlayerLocations {
+export enum PlayerPosition {
   GOALKEEPER = "GOALKEEPER",
   DEFENDER = "DEFENDER",
   MIDFIELDER = "MIDFIELDER",
@@ -79,16 +79,18 @@ export type IWizardForSeasonHeader = {
   href: string;
 };
 
-export type PlayerCardType = {
+export type IPlayerCard = {
   id: number;
-  location: string;
-  cardIsAvailable: boolean;
+  position: string;
+  positionActive: boolean;
+  IsAvailable: boolean;
   playerName: string;
   isSelect: boolean;
 };
 
 export type PlayerCardPropsType = {
-  player: PlayerCardType;
-  count: number;
-  setcount: (count: number) => void;
+  player: IPlayerCard;
+  count?: number;
+  setcount?: (count: number) => void;
+  isSelectable: boolean;
 };
