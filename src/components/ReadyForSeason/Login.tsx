@@ -1,6 +1,7 @@
-import { Button, Stack, Image, Text, Flex } from "@chakra-ui/react";
+import { Button, Stack, Image, Text, Flex, Box } from "@chakra-ui/react";
 import { Step } from "containers/Home";
-import { FirstPageBanner } from "assets/images";
+import { LoginBackgroundImage, LoginImage } from "assets/images";
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from "assets/data";
 
 type LoginType = {
   setStep: (step: Step) => void;
@@ -10,40 +11,42 @@ export const Login = (props: LoginType) => {
   const { setStep } = props;
 
   return (
-    <>
-      <Stack
-        justifyContent={"center"}
-        alignItems={"center"}
-        h="80vh"
-        spacing={8}
+    <Flex
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      margin="auto"
+      gap="35px"
+      height={`calc(100vh - (${HEADER_HEIGHT} + ${FOOTER_HEIGHT} + 150px))`}
+    >
+      <Image src={LoginImage.src} alt="login-image" />
+      <Text fontSize="18px">
+        Build your team, make transfers and earn points based on your players'
+        real-life performances
+      </Text>
+
+      <Button
+        background="rgba(76, 68, 198, 0.3)"
+        borderRadius="4px"
+        height="45px"
+        alignItems="center"
+        fontWeight="600"
+        onClick={() => setStep(Step.CHOOSE_CARDS)}
+        padding="0 40px"
       >
-        <Image
-          src={FirstPageBanner.src}
-          alt="first-banner"
-          width={{ base: "100%", sm: "410px" }}
-        />
-        <Text
-          fontSize="23px"
-          lineHeight="23px"
-          marginTop="34px"
-          marginBottom="50px"
-        >
-          Build your team, make transfers and earn points based on your players'
-          real-life performances
-        </Text>
-        ,
-        <Button
-          backgroundColor="rgba(76, 68, 198, 0.3);"
-          borderRadius="4px"
-          fontSize="19px"
-          padding={["0px 20px", "0px 30px", "0px 50px", "0px 60px"]}
-          height="50px"
-          alignItems="center"
-          onClick={() => setStep(Step.CHOOSE_CARDS)}
-        >
-          <Text>CONNECT WALLET</Text>
-        </Button>
-      </Stack>
-    </>
+        <Text>CONNECT WALLET</Text>
+      </Button>
+      <Image
+        src={LoginBackgroundImage.src}
+        position="absolute"
+        zIndex="-1"
+        top="0"
+        backgroundSize="cover"
+        opacity="0.4"
+        mixBlendMode="overlay"
+        maxHeight="100vh"
+        width="100%"
+      />
+    </Flex>
   );
 };

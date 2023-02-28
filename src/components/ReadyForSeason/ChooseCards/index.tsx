@@ -23,7 +23,6 @@ export const ChooseCards = (props: ChoseCardType) => {
       flexDirection="column"
       alignItems="center"
       maxWidth="container.lg"
-      padding="10px"
     >
       <Text
         fontSize="24px"
