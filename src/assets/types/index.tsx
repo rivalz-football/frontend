@@ -1,10 +1,20 @@
 import { StaticImageData } from "next/image";
 
-export enum CardType {
+export enum PlayerCardType {
   BEGINNER = "BEGINNER",
   SEMI_PRO = "SEMI-PRO",
   PROFESSIONAL = "PROFESSIONAL",
   LEGENDARY = "LEGENDARY",
+}
+
+/* Player Card */
+export interface IPlayerCard {
+  _id: string;
+  name: string;
+  image: string;
+  choiceCount: number;
+  currentCount?: number;
+  publicKeys: string[];
 }
 
 export enum PlayerPosition {
@@ -79,7 +89,7 @@ export type IWizardForSeasonHeader = {
   href: string;
 };
 
-export type IPlayerCard = {
+export type IPlayer = {
   id: number;
   position: string;
   positionActive: boolean;
@@ -88,8 +98,8 @@ export type IPlayerCard = {
   isSelect: boolean;
 };
 
-export type PlayerCardPropsType = {
-  player: IPlayerCard;
+export type PlayerPropsType = {
+  player: IPlayer;
   count?: number;
   setcount?: (count: number) => void;
   isSelectable: boolean;
