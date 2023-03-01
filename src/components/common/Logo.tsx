@@ -1,6 +1,6 @@
 import { Flex, Image, Text } from "@chakra-ui/react";
 import { LogoImage } from "assets/images";
-import { useSidebar } from "contexts/useSidebarToggle";
+import { useSidebar } from "contexts/SidebarContext";
 
 export const Logo = () => {
   const { isSidebarOpen } = useSidebar();

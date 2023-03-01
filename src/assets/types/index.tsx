@@ -92,3 +92,13 @@ export type PlayerCardPropsType = {
   count: number;
   setcount: (count: number) => void;
 };
+
+/* User */
+
+export interface IUser {
+  id: string;
+  displayName: string;
+  sanitizePublicKey: string;
+  avatar: string;
+  isAdmin: boolean;
+}
