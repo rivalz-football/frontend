@@ -36,6 +36,12 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
         backgroundSize="cover"
         position="relative"
         _hover={{ border: "1px solid #EC068D" }}
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-end"
+        alignItems="center"
+        gap="5px"
+        padding="20px"
       >
         <Box
           position="absolute"
@@ -53,26 +59,12 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
           left="50%"
           transform="translate(-50%, -50%)"
           filter={isSelect ? "none" : "grayscale(100%)"}
+          userSelect="none"
         />
-        <Text
-          position="absolute"
-          bottom="20%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          color="gray.100"
-          filter={isSelect ? "none" : "grayscale(100%)"}
-          fontSize="15px"
-        >
+        <Text color="gray.100" fontSize="15px" opacity="0.4" userSelect="none">
           {props.player.position}
         </Text>
-        <Text
-          position="absolute"
-          bottom="5%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          color="gray.100"
-          filter={isSelect ? "none" : "grayscale(100%)"}
-        >
+        <Text color="gray.100" opacity="0.4">
           #{props.player.id}
         </Text>
       </Box>

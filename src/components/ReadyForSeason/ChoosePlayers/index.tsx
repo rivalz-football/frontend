@@ -107,7 +107,7 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
               </Box>
               <Grid
                 templateColumns={{
-                  base: "repeat(2, 1fr)",
+                  base: "repeat(1, 1fr)",
                   md: "repeat(4, 1fr)",
                 }}
                 gap={4}

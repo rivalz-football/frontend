@@ -89,7 +89,11 @@ export const WaitingRoom = (props: WaitingRoomType) => {
         width="100%"
         marginTop="40px"
       >
-        <Text display="block" fontWeight="300">
+        <Text
+          display="block"
+          fontWeight="300"
+          fontSize={{ base: "14px", md: "16px" }}
+        >
           You have a total of {fakeUser.playerAmount} players
         </Text>
         <Menu>
@@ -130,7 +134,7 @@ export const WaitingRoom = (props: WaitingRoomType) => {
 
       <SimpleGrid
         templateColumns={{
-          base: "repeat(2, 1fr)",
+          base: "repeat(1, 1fr)",
           md: "repeat(4, 1fr)",
         }}
         gap={4}
