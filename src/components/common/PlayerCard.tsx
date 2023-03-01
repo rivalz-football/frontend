@@ -11,13 +11,11 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
   const [isSelect, setIsSelect] = useState(props.player.isSelect);
 
   const handleClick = () => {
-    setIsSelect(!isSelect);
-    if (isSelect === false) {
-      props.setcount(props.count + 1);
-    }
-    if (isSelect === true) {
-      props.setcount(props.count - 1);
-    }
+    if (props.isSelectable) setIsSelect(!isSelect);
+    if (!props.setcount || !props.count) return;
+    if (isSelect) props.setcount(props.count - 1);
+    else props.setcount(props.count + 1);
+    console.log(props.count);
   };
 
   return (
