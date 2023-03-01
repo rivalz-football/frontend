@@ -1,15 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Container, Grid, Tabs, Text } from "@chakra-ui/react";
 
 import { PlayerCard } from "../../common/PlayerCard";
 import { PlayerPosition } from "assets/types";
@@ -24,6 +13,18 @@ type ChosePlayerType = {
 
 export const ChoosePlayers = (props: ChosePlayerType) => {
   const [count, setcount] = useState(0);
+
+  const [selectedPosition, setSelectedPosition] = useState(
+    PlayerPosition.GOALKEEPER
+  );
+  const [isPositionTabSelected, setisPositionTabSelected] = useState(true);
+
+  const handlePositionSelection = (position: PlayerPosition) => {
+    setSelectedPosition(position);
+    console.log(selectedPosition);
+    setisPositionTabSelected(true);
+  };
+
   const { setStep } = props;
 
   return (
@@ -39,7 +40,6 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
           fontSize="24px"
           fontWeight="600"
           lineHeight="23px"
-          color="#FFFFFF"
           textTransform="uppercase"
         >
           Choose your own player cards
@@ -48,7 +48,6 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
           fontSize="16px"
           fontWeight="400"
           lineHeight="23px"
-          color="#FFFFFF"
           textAlign="center"
           marginTop="14px"
           maxWidth="839px"
@@ -57,46 +56,55 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
           <br /> Note that there is a minimum number of players you must select
           from each region
         </Text>
-        <Tabs variant="soft-rounded">
-          <TabList
-            display="flex"
-            justifyContent="center"
-            paddingTop="40px"
-            fontSize="17px"
-            lineHeight="22px"
-            fontWeight="600"
-            color="#FFFFFF"
-            gap="161px"
-          >
-            {Object.values(PlayerPosition).map((location, index) => (
-              <Tab key={index} _selected={{ bg: "none", color: "#EC068D" }}>
-                {location}
-              </Tab>
-            ))}
-          </TabList>
-          <Box
-            padding={["0", "0", "0", "40px"]}
-            display="flex"
-            justifyContent="space-between"
-          >
-            <Box>
-              <Text color="#54C748">You have selected 1 Goalkeepers card</Text>
-              <Text color="#D95543">
-                *You should choose at least 1 Goalkeeper card
-              </Text>
-            </Box>
+        <Box
+          display="flex"
+          justifyContent="center"
+          paddingTop="40px"
+          fontSize="17px"
+          lineHeight="22px"
+          fontWeight="600"
+          gap="161px"
+        >
+          {Object.values(PlayerPosition).map((location, index) => (
             <Button
-              bg=" rgba(75, 165, 65, 0.6);"
-              textTransform="uppercase"
-              borderRadius="none"
-              onClick={() => setStep(Step.WAITING_ROOM)}
+              key={index}
+              display="flex"
+              bg="none"
+              onClick={() => handlePositionSelection(location)}
+              color={selectedPosition === location ? "#EC068D" : ""}
+              _hover={{ bg: "none", color: "#EC068D" }}
+              textTransform="capitalize"
             >
-              confirm Goalkeepers cards
+              {location}
             </Button>
-          </Box>
+          ))}
+        </Box>
 
-          <TabPanels justifyContent="center">
-            <TabPanel display="flex" justifyContent="center">
+        {isPositionTabSelected && (
+          <Box justifyContent="center">
+            <Box>
+              <Box
+                padding={["0", "0", "0", "40px"]}
+                display="flex"
+                justifyContent="space-between"
+              >
+                <Box>
+                  <Text color="#54C748">
+                    You have selected 1 {selectedPosition} card
+                  </Text>
+                  <Text color="#D95543">
+                    *You should choose at least 1 {selectedPosition} card
+                  </Text>
+                </Box>
+                <Button
+                  bg=" rgba(75, 165, 65, 0.6);"
+                  textTransform="uppercase"
+                  borderRadius="none"
+                  onClick={() => setStep(Step.WAITING_ROOM)}
+                >
+                  confirm {selectedPosition} cards
+                </Button>
+              </Box>
               <Grid
                 templateColumns={{
                   base: "repeat(2, 1fr)",
@@ -107,7 +115,9 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
                 height="1334px"
                 overflow="scroll"
               >
-                {PlayerCards.map((player, index) => (
+                {PlayerCards.filter(
+                  (player) => player.position === selectedPosition
+                ).map((player, index) => (
                   <PlayerCard
                     key={index}
                     player={player}
@@ -117,69 +127,9 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
                   />
                 ))}
               </Grid>
-            </TabPanel>
-            <TabPanel>
-              <Grid
-                templateColumns={{
-                  base: "repeat(2, 1fr)",
-                  md: "repeat(4, 1fr)",
-                }}
-                gap={4}
-                justifyContent="center"
-              >
-                {PlayerCards.map((player, index) => (
-                  <PlayerCard
-                    key={index}
-                    player={player}
-                    setcount={setcount}
-                    count={count}
-                    isSelectable={true}
-                  />
-                ))}
-              </Grid>
-            </TabPanel>
-            <TabPanel>
-              <Grid
-                templateColumns={{
-                  base: "repeat(2, 1fr)",
-                  md: "repeat(4, 1fr)",
-                }}
-                gap={4}
-                justifyContent="center"
-              >
-                {PlayerCards.map((player, index) => (
-                  <PlayerCard
-                    key={index}
-                    player={player}
-                    setcount={setcount}
-                    count={count}
-                    isSelectable={true}
-                  />
-                ))}
-              </Grid>
-            </TabPanel>
-            <TabPanel>
-              <Grid
-                templateColumns={{
-                  base: "repeat(2, 1fr)",
-                  md: "repeat(4, 1fr)",
-                }}
-                gap={4}
-                justifyContent="center"
-              >
-                {PlayerCards.map((player, index) => (
-                  <PlayerCard
-                    key={index}
-                    player={player}
-                    setcount={setcount}
-                    count={count}
-                    isSelectable={true}
-                  />
-                ))}
-              </Grid>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+            </Box>
+          </Box>
+        )}
       </Container>
     </>
   );
