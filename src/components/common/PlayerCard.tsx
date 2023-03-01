@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, CardFooter, Image } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { PlayerBackgroundImage } from "assets/images";
 import { RivalZ } from "assets/images";
 import CardSelectedIcon from "assets/icons/card-selected-icon.svg";

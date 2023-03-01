@@ -74,7 +74,7 @@ export const ChooseCards = (props: ChoseCardType) => {
           color="#FFFFFF"
           maxWidth="390px"
         >
-          You have selected
+          You have selected{" "}
           <Text color="#FF5ABB" display="inline-block">
             3 Rivalz Cards
           </Text>{" "}
