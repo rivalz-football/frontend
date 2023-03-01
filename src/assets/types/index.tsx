@@ -94,3 +94,13 @@ export type PlayerCardPropsType = {
   setcount?: (count: number) => void;
   isSelectable: boolean;
 };
+
+/* User */
+
+export interface IUser {
+  id: string;
+  displayName: string;
+  sanitizePublicKey: string;
+  avatar: string;
+  isAdmin: boolean;
+}

@@ -2,14 +2,9 @@ import { Button, Stack, Image, Text, Flex, Box } from "@chakra-ui/react";
 import { Step } from "containers/Home";
 import { LoginBackgroundImage, LoginImage } from "assets/images";
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from "assets/data";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
-type LoginType = {
-  setStep: (step: Step) => void;
-};
-
-export const Login = (props: LoginType) => {
-  const { setStep } = props;
-
+export const Login = () => {
   return (
     <Flex
       direction="column"
@@ -24,17 +19,18 @@ export const Login = (props: LoginType) => {
         players&apos; real-life performances
       </Text>
 
-      <Button
-        background="rgba(76, 68, 198, 0.3)"
-        borderRadius="4px"
-        height="45px"
-        alignItems="center"
-        fontWeight="600"
-        onClick={() => setStep(Step.CHOOSE_CARDS)}
-        padding="0 40px"
-      >
-        <Text>CONNECT WALLET</Text>
-      </Button>
+      <WalletMultiButton
+        style={{
+          background: "rgba(76, 68, 198, 0.3)",
+          borderRadius: "4px",
+          height: "45px",
+          alignItems: "center",
+          fontWeight: "600",
+          padding: "0 40px",
+          textTransform: "uppercase",
+        }}
+      />
+
       <Image
         src={LoginBackgroundImage.src}
         position="absolute"

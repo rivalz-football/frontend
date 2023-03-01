@@ -53,7 +53,7 @@ export const Footer = () => {
           fontWeight="600"
           display="inline-block"
         >
-          Solana
+          #Grizzlython
         </Text>
       </Box>
     </Flex>
