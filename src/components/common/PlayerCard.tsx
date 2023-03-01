@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { PlayerBackgroundImage } from "assets/images";
 import { RivalZ } from "assets/images";
 import CardSelectedIcon from "assets/icons/card-selected-icon.svg";
@@ -13,6 +13,7 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
   const handleClick = () => {
     if (props.isSelectable) setIsSelect(!isSelect);
     if (!props.setcount || !props.count) return;
+
     if (isSelect) props.setcount(props.count - 1);
     else props.setcount(props.count + 1);
     console.log(props.count);
@@ -25,7 +26,6 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
       justifyContent="center"
       cursor="pointer"
       onClick={() => {
-        console.log("click");
         handleClick();
       }}
     >
@@ -54,6 +54,27 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
           transform="translate(-50%, -50%)"
           filter={isSelect ? "none" : "grayscale(100%)"}
         />
+        <Text
+          position="absolute"
+          bottom="20%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          color="gray.100"
+          filter={isSelect ? "none" : "grayscale(100%)"}
+          fontSize="15px"
+        >
+          {props.player.position}
+        </Text>
+        <Text
+          position="absolute"
+          bottom="5%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          color="gray.100"
+          filter={isSelect ? "none" : "grayscale(100%)"}
+        >
+          #{props.player.id}
+        </Text>
       </Box>
     </Box>
   );

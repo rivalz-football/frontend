@@ -17,11 +17,12 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
   const [selectedPosition, setSelectedPosition] = useState(
     PlayerPosition.GOALKEEPER
   );
-  const [isPositionSelected, setIsPositionSelected] = useState(false);
+  const [isPositionTabSelected, setisPositionTabSelected] = useState(true);
 
   const handlePositionSelection = (position: PlayerPosition) => {
     setSelectedPosition(position);
-    setIsPositionSelected(true);
+    console.log(selectedPosition);
+    setisPositionTabSelected(true);
   };
 
   const { setStep } = props;
@@ -69,16 +70,17 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
               key={index}
               display="flex"
               bg="none"
-              onChange={() => handlePositionSelection(location)}
-              _selected={{ bg: "none", color: "#EC068D" }}
+              onClick={() => handlePositionSelection(location)}
+              color={selectedPosition === location ? "#EC068D" : ""}
               _hover={{ bg: "none", color: "#EC068D" }}
+              textTransform="capitalize"
             >
               {location}
             </Button>
           ))}
         </Box>
 
-        {isPositionSelected && (
+        {isPositionTabSelected && (
           <Box justifyContent="center">
             <Box>
               <Box
@@ -100,7 +102,7 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
                   borderRadius="none"
                   onClick={() => setStep(Step.WAITING_ROOM)}
                 >
-                  confirm Goalkeepers cards
+                  confirm {selectedPosition} cards
                 </Button>
               </Box>
               <Grid
@@ -113,7 +115,9 @@ export const ChoosePlayers = (props: ChosePlayerType) => {
                 height="1334px"
                 overflow="scroll"
               >
-                {PlayerCards.map((player, index) => (
+                {PlayerCards.filter(
+                  (player) => player.position === selectedPosition
+                ).map((player, index) => (
                   <PlayerCard
                     key={index}
                     player={player}
