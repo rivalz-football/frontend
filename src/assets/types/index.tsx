@@ -161,4 +161,6 @@ export interface IStatus {
   playersConfig?: {
     [key in PlayerPosition]: IPlayerConfig;
   };
+  maxSelectablePlayersCount?: number;
+  selectedPlayersCount?: number;
 }

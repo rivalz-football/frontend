@@ -22,7 +22,6 @@ type ChoosePlayersProps = {
 };
 
 export const ChoosePlayers = (props: ChoosePlayersProps) => {
-  const { setStep } = props;
   const { status } = useUserAuth();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const submitPlayers = useSubmitPlayers();
@@ -52,6 +51,10 @@ export const ChoosePlayers = (props: ChoosePlayersProps) => {
   useEffect(() => {
     setSelectedIds([]);
   }, [selectedPosition]);
+
+  // const onChangeSelectedPosition = (position: PlayerPosition) => {
+  //   setSelectedPosition(position);
+  // };
 
   const isSelected = (key: string) => {
     return selectedIds.includes(key);
@@ -147,11 +150,13 @@ export const ChoosePlayers = (props: ChoosePlayersProps) => {
             <Button
               key={index}
               display="flex"
-              bg="none"
-              onClick={() => setSelectedPosition(position)}
+              variant="unstyled"
+              background="transparent"
+              // onClick={() => onChangeSelectedPosition(position)}
               opacity={selectedPosition === position ? 1 : 0.15}
               color={selectedPosition === position ? "#EC068D" : ""}
-              _hover={{ bg: "none", color: "#EC068D", opacity: 1 }}
+              _hover={{ color: selectedPosition === position ? "#EC068D" : "" }}
+              isDisabled={selectedPosition !== position}
               textTransform="uppercase"
             >
               {position}

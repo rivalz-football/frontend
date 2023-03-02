@@ -71,11 +71,14 @@ export const useSubmitPlayers = () => {
 
 export const useStakeCards = () => {
   const toast = useToast();
+  const queryClient = useQueryClient();
 
   return useMutation(
     "stakeCards",
     async () => {
       const { data } = await axios.get("/auth/stake");
+      queryClient.invalidateQueries("meStatus");
+
       return data;
     },
     {
