@@ -1,42 +1,4 @@
-import { useRef, useEffect } from "react";
-import { select, zoom, zoomIdentity, ZoomTransform } from "d3";
-import svgFile from "./my-svg-file.svg";
-
 export const Area = () => {
-  const svgRef = useRef<SVGSVGElement>(null);
-
-  useEffect(() => {
-    if (!svgRef.current) return;
-    const svgElement = select<SVGSVGElement, unknown>(svgRef.current);
-
-    // 3D perspective
-    const perspective = 1000;
-
-    // Zoom
-    const zoomBehavior = zoom<SVGSVGElement, unknown>()
-      .scaleExtent([1, 10])
-      .on("zoom", () => {
-        const { x, y, k } = (event as any).transform;
-        const transform = `translate(${x}px, ${y}px) scale(${k})`;
-        svgElement.attr("transform", transform);
-      });
-    svgElement.call(zoomBehavior);
-
-    // Rotation
-    let previousAngle = 0;
-    const rotate = () => {
-      const angle = (previousAngle + 1) % 360;
-      const rotation = `rotate(${angle}deg)`;
-      svgElement.attr(
-        "style",
-        `transform: perspective(${perspective}px) ${rotation};`
-      );
-      previousAngle = angle;
-      requestAnimationFrame(rotate);
-    };
-    requestAnimationFrame(rotate);
-  }, []);
-
   return (
     <svg
       width="803"
@@ -44,7 +6,7 @@ export const Area = () => {
       viewBox="0 0 803 497"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      // ref={svgRef}
     >
       <g opacity="0.75">
         <path

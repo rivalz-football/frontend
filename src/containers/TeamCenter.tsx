@@ -13,7 +13,7 @@ export const TeamCenterContainer = () => {
         You can include and remove your players in your weekly team
       </Text>
 
-      <Flex marginTop="30px">
+      <Flex marginTop="30px" justifyContent="space-between">
         <FootballArea />
         <Players />
       </Flex>

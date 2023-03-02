@@ -9,6 +9,8 @@ import JackpotIcon from "./jackpot.svg";
 import DownArrowIcon from "./down-arrow.svg";
 import GiftIcon from "./gift.svg";
 import NotificationIcon from "./notification.svg";
+import OutlineDots from "./outline-dots.svg";
+import FilterSmallIcon from "./filter-small-icon.svg";
 
 export {
   CategoryIcon,
@@ -22,4 +24,6 @@ export {
   DownArrowIcon,
   GiftIcon,
   NotificationIcon,
+  OutlineDots,
+  FilterSmallIcon,
 };
