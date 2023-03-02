@@ -27,7 +27,7 @@ export const PlayerCard = (props: PlayerCardProps) => {
       height="320px"
       backgroundSize="cover"
       position="relative"
-      _hover={{ border: "1px solid #EC068D" }}
+      _hover={{ border: `${!!onClick && "1px solid #EC068D"}` }}
       transition="all 0.3s ease-in-out"
     >
       <Box
@@ -36,8 +36,9 @@ export const PlayerCard = (props: PlayerCardProps) => {
         top="12px"
         filter={selected ? "none" : "grayscale(100%)"}
       >
-        <CardSelectedIcon />
+        {!!onClick && <CardSelectedIcon />}
       </Box>
+
       <Image
         src={LogoImage.src}
         alt="cardlogo"
@@ -58,15 +59,7 @@ export const PlayerCard = (props: PlayerCardProps) => {
         padding="20px"
       >
         {player?.shortPosition && (
-          <Text
-            position="absolute"
-            bottom="20%"
-            left="50%"
-            transform="translate(-50%, -50%)"
-            color="gray.100"
-            filter={selected ? "none" : "grayscale(100%)"}
-            fontSize="15px"
-          >
+          <Text fontSize="23px" opacity="0.4" letterSpacing="0.1em">
             {player.shortPosition}
           </Text>
         )}
