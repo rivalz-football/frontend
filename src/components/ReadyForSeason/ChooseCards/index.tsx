@@ -4,18 +4,72 @@ import {
   Container,
   Flex,
   SimpleGrid,
+  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { CardItem } from "./CardItem";
-import { cards } from "assets/data/cards";
+// import { cards } from "assets/data/cards";
 import { Step } from "containers/Home";
+import { usePlayerCards, useStakeCards } from "hooks/useGame";
+import { Spin } from "components/common/Spinner";
+import { IPlayerCard } from "assets/types";
+import { useEffect, useState } from "react";
 type ChoseCardType = {
   setStep: (step: Step) => void;
 };
 
 export const ChooseCards = (props: ChoseCardType) => {
   const { setStep } = props;
+  const { data: cards, isLoading } = usePlayerCards();
+  let [fakeCards, setFakeCards] = useState<IPlayerCard[]>([]);
+  const [activeUniqueCardCount, setActiveUniqueCardCount] = useState(0);
+  const [sumChoicePlayerCount, setSumChoicePlayerCount] = useState(0);
+
+  const stakeCards = useStakeCards();
+
+  useEffect(() => {
+    if (!cards || isLoading) return;
+
+    const updatedFakeCards = cards.map((card: IPlayerCard) => ({
+      ...card,
+      currentCount: 1,
+    }));
+
+    setFakeCards(updatedFakeCards);
+
+    const uniqueCards = updatedFakeCards.filter(
+      (card: IPlayerCard) => card.currentCount && card.currentCount > 0
+    );
+
+    const activeUniqueCardCount = uniqueCards.length;
+
+    setActiveUniqueCardCount(activeUniqueCardCount);
+  }, [cards]);
+
+  useEffect(() => {
+    const uniqueCards = fakeCards.filter(
+      (card: IPlayerCard) => card.currentCount && card.currentCount > 0
+    );
+
+    const activeUniqueCardCount = uniqueCards.length;
+
+    setActiveUniqueCardCount(activeUniqueCardCount);
+
+    const sumChoicePlayerCount = fakeCards.reduce(
+      (acc: number, card: IPlayerCard) =>
+        acc + card.choiceCount * (card.currentCount || 0),
+      0
+    );
+
+    setSumChoicePlayerCount(sumChoicePlayerCount);
+  }, [fakeCards]);
+
+  const onSubmitForStake = async () => {
+    if (stakeCards.isLoading) return;
+
+    await stakeCards.mutateAsync();
+  };
 
   return (
     <Container
@@ -50,16 +104,20 @@ export const ChooseCards = (props: ChoseCardType) => {
         can purchase more football players for your team by using multiple
         cards.
       </Text>
-      <SimpleGrid
-        gap="35px"
-        marginTop="35px"
-        templateColumns="repeat(auto-fill, minmax(220px, 1fr))"
-        width="100%"
-      >
-        {cards.map((card, index) => (
-          <CardItem key={index} card={card} />
-        ))}
-      </SimpleGrid>
+      {isLoading && <Spinner my="60px" />}
+      {!isLoading && fakeCards && (
+        <SimpleGrid
+          gap="35px"
+          marginTop="35px"
+          templateColumns="repeat(auto-fill, minmax(220px, 1fr))"
+          width="100%"
+        >
+          {fakeCards.map((card: IPlayerCard) => (
+            <CardItem key={card._id} card={card} />
+          ))}
+        </SimpleGrid>
+      )}
+
       <Flex
         justifyContent="space-between"
         marginTop="35px"
@@ -76,29 +134,27 @@ export const ChooseCards = (props: ChoseCardType) => {
         >
           You have selected{" "}
           <Text color="#FF5ABB" display="inline-block">
-            3 Rivalz Cards
+            {activeUniqueCardCount} Rivalz Cards
           </Text>{" "}
           in total. Rivalz cards will give you the right to choose{" "}
           <Text color="#FF5ABB" display="inline-block">
-            18 player cards.
+            {sumChoicePlayerCount} player cards.
           </Text>
         </Box>
         <Button
           padding="13px 40px"
           background="rgba(75, 165, 65, 0.89)"
+          _hover={{
+            background: "rgba(75, 165, 65, 1)",
+          }}
           borderRadius="4px"
-          onClick={() => setStep(Step.CHOOSE_PLAYERS)}
+          fontSize="16px"
+          fontWeight="700"
+          textTransform="uppercase"
+          isLoading={stakeCards.isLoading}
+          onClick={onSubmitForStake}
         >
-          <Text
-            fontSize="16px"
-            fontWeight="700"
-            lineHeight="20px"
-            color="#FFFFFF"
-            textTransform="uppercase"
-            display="inline"
-          >
-            STAKE ALL CARDS & CONTINUE
-          </Text>
+          Stake All Cards & Continue
         </Button>
       </Flex>
     </Container>

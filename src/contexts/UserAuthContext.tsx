@@ -1,7 +1,7 @@
 import { useToast } from "@chakra-ui/react";
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 
-import { useAuthLogout, useAuthMe } from "hooks/useUser";
+import { useAuthLogout, useAuthMe, useMeStatus } from "hooks/useUser";
 import { createLoginTx } from "plugins/createLogin";
 import { useRouter } from "next/router";
 
@@ -13,13 +13,13 @@ import {
   useState,
 } from "react";
 import { useQueryClient } from "react-query";
-import { IUser } from "assets/types";
+import { IStatus, IUser } from "assets/types";
 import { LoginContainer } from "containers/Login";
 import { Spin } from "components/common/Spinner";
 
 interface UserAuthContextData {
   user: IUser | undefined;
-
+  status: IStatus | undefined;
   logout: () => Promise<void>;
 }
 
@@ -35,6 +35,9 @@ export const UserAuthProvider = (props: PropsWithChildren) => {
   const clientQuery = useQueryClient();
   const { isLoading: isUserLoading, data: user } = useAuthMe();
   const [loggedUser, setLoggedUser] = useState<IUser | undefined>(undefined);
+  const { isLoading: isUserStatusLoading, data: status } = useMeStatus(
+    !!loggedUser
+  );
 
   const logout = useAuthLogout();
   const toast = useToast();
@@ -84,12 +87,13 @@ export const UserAuthProvider = (props: PropsWithChildren) => {
     router.push("/");
   };
 
-  if (isUserLoading) return <Spin />;
+  if (isUserLoading || isUserStatusLoading) return <Spin />;
 
   return (
     <UserAuthContext.Provider
       value={{
         user: loggedUser,
+        status,
         logout: logoutUser,
       }}
     >

@@ -8,6 +8,7 @@ import {
   MenuItem,
   MenuList,
   SimpleGrid,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import Countdown, { CountdownProps } from "react-countdown";
@@ -16,8 +17,10 @@ import ArrowUpIcon from "assets/icons/arrow-up.svg";
 
 import { Step } from "containers/Home";
 import { PlayerPosition } from "assets/types";
-import { PlayerCards } from "assets/data/playerCards";
+// import { PlayerCards } from "assets/data/playerCards";
 import { PlayerCard } from "components/common/PlayerCard";
+import { useMePlayers } from "hooks/useUser";
+import { IPlayer } from "assets/types";
 
 type WaitingRoomType = {
   setStep: (step: Step) => void;
@@ -30,6 +33,7 @@ const fakeUser = {
 
 export const WaitingRoom = (props: WaitingRoomType) => {
   const { setStep } = props;
+  const { data: players, isLoading } = useMePlayers();
 
   return (
     <Container
@@ -143,10 +147,14 @@ export const WaitingRoom = (props: WaitingRoomType) => {
         height="762px"
         overflowY="scroll"
         padding="15px"
+        width="100%"
       >
-        {PlayerCards.map((player, index) => (
-          <PlayerCard key={index} player={player} isSelectable={false} />
-        ))}
+        {isLoading && <Spinner my="40px" />}
+
+        {!isLoading &&
+          players.map((player: IPlayer, index: number) => (
+            <PlayerCard key={index} player={player} selected={false} />
+          ))}
       </SimpleGrid>
       <Button
         display="flex"
