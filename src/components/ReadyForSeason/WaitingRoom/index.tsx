@@ -16,7 +16,7 @@ import ArrowUpIcon from "assets/icons/arrow-up.svg";
 
 import { Step } from "containers/Home";
 import { PlayerPosition } from "assets/types";
-import { PlayerCards } from "assets/data/playerCards";
+// import { PlayerCards } from "assets/data/playerCards";
 import { PlayerCard } from "components/common/PlayerCard";
 
 type WaitingRoomType = {
@@ -140,9 +140,9 @@ export const WaitingRoom = (props: WaitingRoomType) => {
         overflowY="scroll"
         padding="15px"
       >
-        {PlayerCards.map((player, index) => (
+        {/* {PlayerCards.map((player, index) => (
           <PlayerCard key={index} player={player} isSelectable={false} />
-        ))}
+        ))} */}
       </SimpleGrid>
       <Button
         display="flex"

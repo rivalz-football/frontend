@@ -1,23 +1,20 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import { PlayerBackgroundImage } from "assets/images";
-import { RivalZ } from "assets/images";
+import { LogoImage } from "assets/images";
 import CardSelectedIcon from "assets/icons/card-selected-icon.svg";
 
-// cardatası
-import { PlayerCardPropsType } from "assets/types";
+import { IPlayer } from "assets/types";
 import { useState } from "react";
+import { Motion, spring } from "react-motion";
 
-export const PlayerCard = (props: PlayerCardPropsType) => {
-  const [isSelect, setIsSelect] = useState(props.player.isSelect);
+type PlayerCardProps = {
+  player: IPlayer;
+  selected: boolean;
+  onClick: () => void;
+};
 
-  const handleClick = () => {
-    if (props.isSelectable) setIsSelect(!isSelect);
-    if (!props.setcount || !props.count) return;
-
-    if (isSelect) props.setcount(props.count - 1);
-    else props.setcount(props.count + 1);
-    console.log(props.count);
-  };
+export const PlayerCard = (props: PlayerCardProps) => {
+  const { player, selected, onClick } = props;
 
   return (
     <Box
@@ -25,55 +22,57 @@ export const PlayerCard = (props: PlayerCardPropsType) => {
       display="flex"
       justifyContent="center"
       cursor="pointer"
-      onClick={() => {
-        handleClick();
-      }}
+      onClick={onClick}
+      backgroundImage={`url(${PlayerBackgroundImage.src})`}
+      height="320px"
+      backgroundSize="cover"
+      position="relative"
+      _hover={{ border: "1px solid #EC068D" }}
+      transition="all 0.3s ease-in-out"
     >
       <Box
-        w="235px"
-        h="320px"
-        backgroundImage={`url(${PlayerBackgroundImage.src})`}
-        backgroundSize="cover"
-        position="relative"
-        _hover={{ border: "1px solid #EC068D" }}
+        position="absolute"
+        right="12px"
+        top="12px"
+        filter={selected ? "none" : "grayscale(100%)"}
       >
-        <Box
-          position="absolute"
-          right="12px"
-          top="12px"
-          filter={isSelect ? "none" : "grayscale(100%)"}
-        >
-          <CardSelectedIcon />
-        </Box>
-        <Image
-          src={RivalZ.src}
-          alt="cardlogo"
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          filter={isSelect ? "none" : "grayscale(100%)"}
-        />
-        <Text
-          position="absolute"
-          bottom="20%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          color="gray.100"
-          filter={isSelect ? "none" : "grayscale(100%)"}
-          fontSize="15px"
-        >
-          {props.player.position}
-        </Text>
-        <Text
-          position="absolute"
-          bottom="5%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          color="gray.100"
-          filter={isSelect ? "none" : "grayscale(100%)"}
-        >
-          #{props.player.id}
+        <CardSelectedIcon />
+      </Box>
+      <Image
+        src={LogoImage.src}
+        alt="cardlogo"
+        width="60px"
+        height="70px"
+        position="absolute"
+        top="50%"
+        left="50%"
+        transform="translate(-50%, -50%)"
+        filter={selected ? "none" : "grayscale(100%)"}
+      />
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-end"
+        alignItems="center"
+        gap="5px"
+        padding="20px"
+      >
+        {player?.shortPosition && (
+          <Text
+            position="absolute"
+            bottom="20%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            color="gray.100"
+            filter={selected ? "none" : "grayscale(100%)"}
+            fontSize="15px"
+          >
+            {player.shortPosition}
+          </Text>
+        )}
+
+        <Text opacity={0.4} letterSpacing="2px">
+          #{player.key}
         </Text>
       </Box>
     </Box>
