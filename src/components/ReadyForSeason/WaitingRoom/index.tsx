@@ -138,16 +138,11 @@ export const WaitingRoom = (props: WaitingRoomType) => {
 
       <SimpleGrid
         templateColumns={{
-          base: "repeat(1, 1fr)",
-          md: "repeat(4, 1fr)",
+          base: "repeat(2, 1fr)",
+          md: "repeat(auto-fill, minmax(235px, 1fr))",
         }}
-        gap={4}
-        justifyContent="center"
-        marginTop="27px"
-        height="762px"
-        overflowY="scroll"
-        padding="15px"
-        width="100%"
+        gap="20px"
+        marginTop="25px"
       >
         {isLoading && <Spinner my="40px" />}
 
