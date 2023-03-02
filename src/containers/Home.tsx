@@ -29,13 +29,17 @@ export const HomeContainer = () => {
   const CurrentComponent = componentsForReady[step];
 
   useEffect(() => {
-    const completedChoosePlayers = Object.keys(
-      status?.playersConfig || {}
-    ).every(
-      (key) => status?.playersConfig?.[key as PlayerPosition].isSelectCompleted
-    );
+    if (status?.playersConfig) {
+      const completedChoosePlayers = Object.keys(
+        status?.playersConfig || {}
+      ).every(
+        (key) =>
+          status?.playersConfig?.[key as PlayerPosition].isSelectCompleted
+      );
 
-    if (completedChoosePlayers) return setStep(Step.WAITING_ROOM);
+      if (completedChoosePlayers) return setStep(Step.WAITING_ROOM);
+    }
+
     if (status?.isStaked) return setStep(Step.CHOOSE_PLAYERS);
   }, [status]);
 
