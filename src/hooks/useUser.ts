@@ -37,3 +37,16 @@ export const useMeStatus = (enabled: boolean) => {
     }
   );
 };
+
+export const useMePlayers = () => {
+  return useQuery(
+    "mePlayers",
+    async () => {
+      const { data } = await axios.get("/auth/me/players");
+      return data;
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+};

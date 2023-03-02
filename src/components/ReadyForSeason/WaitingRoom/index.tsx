@@ -8,6 +8,7 @@ import {
   MenuItem,
   MenuList,
   SimpleGrid,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import Countdown, { CountdownProps } from "react-countdown";
@@ -18,6 +19,8 @@ import { Step } from "containers/Home";
 import { PlayerPosition } from "assets/types";
 // import { PlayerCards } from "assets/data/playerCards";
 import { PlayerCard } from "components/common/PlayerCard";
+import { useMePlayers } from "hooks/useUser";
+import { IPlayer } from "assets/types";
 
 type WaitingRoomType = {
   setStep: (step: Step) => void;
@@ -30,6 +33,7 @@ const fakeUser = {
 
 export const WaitingRoom = (props: WaitingRoomType) => {
   const { setStep } = props;
+  const { data: players, isLoading } = useMePlayers();
 
   return (
     <Container
@@ -89,7 +93,11 @@ export const WaitingRoom = (props: WaitingRoomType) => {
         width="100%"
         marginTop="40px"
       >
-        <Text display="block" fontWeight="300">
+        <Text
+          display="block"
+          fontWeight="300"
+          fontSize={{ base: "14px", md: "16px" }}
+        >
           You have a total of {fakeUser.playerAmount} players
         </Text>
         <Menu>
@@ -131,18 +139,17 @@ export const WaitingRoom = (props: WaitingRoomType) => {
       <SimpleGrid
         templateColumns={{
           base: "repeat(2, 1fr)",
-          md: "repeat(4, 1fr)",
+          md: "repeat(auto-fill, minmax(235px, 1fr))",
         }}
-        gap={4}
-        justifyContent="center"
-        marginTop="27px"
-        height="762px"
-        overflowY="scroll"
-        padding="15px"
+        gap="20px"
+        marginTop="25px"
       >
-        {/* {PlayerCards.map((player, index) => (
-          <PlayerCard key={index} player={player} isSelectable={false} />
-        ))} */}
+        {isLoading && <Spinner my="40px" />}
+
+        {!isLoading &&
+          players.map((player: IPlayer, index: number) => (
+            <PlayerCard key={index} player={player} selected={false} />
+          ))}
       </SimpleGrid>
       <Button
         display="flex"

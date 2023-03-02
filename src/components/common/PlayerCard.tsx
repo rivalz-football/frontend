@@ -10,7 +10,7 @@ import { Motion, spring } from "react-motion";
 type PlayerCardProps = {
   player: IPlayer;
   selected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const PlayerCard = (props: PlayerCardProps) => {
