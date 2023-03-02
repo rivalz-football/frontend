@@ -13,7 +13,7 @@ import { PlayerItem } from "./PlayerItem";
 
 import { TeamPlayers } from "./data/typeProps";
 import { FilterSmallIcon } from "assets/icons";
-import { PlayerLocations } from "assets/types";
+import { PlayerPosition } from "assets/types";
 
 export const Players = () => {
   return (
@@ -57,9 +57,9 @@ export const Players = () => {
               </Text>
             </MenuButton>
             <MenuList padding="4px 28px" bg="#111111">
-              {Object.values(PlayerLocations).map((location, index) => (
+              {Object.values(PlayerPosition).map((position, index) => (
                 <MenuItem bg="#111111" key={index}>
-                  {location}
+                  {position}
                 </MenuItem>
               ))}
             </MenuList>
