@@ -89,6 +89,8 @@ export const UserAuthProvider = (props: PropsWithChildren) => {
 
   if (isUserLoading || isUserStatusLoading) return <Spin />;
 
+  if (!loggedUser) return <LoginContainer />;
+
   return (
     <UserAuthContext.Provider
       value={{
