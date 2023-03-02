@@ -26,11 +26,6 @@ type WaitingRoomType = {
   setStep: (step: Step) => void;
 };
 
-const fakeUser = {
-  name: "Daggex",
-  playerAmount: 5,
-};
-
 export const WaitingRoom = (props: WaitingRoomType) => {
   const { setStep } = props;
   const { data: players, isLoading } = useMePlayers();
@@ -98,7 +93,7 @@ export const WaitingRoom = (props: WaitingRoomType) => {
           fontWeight="300"
           fontSize={{ base: "14px", md: "16px" }}
         >
-          You have a total of {fakeUser.playerAmount} players
+          You have a total of {players?.length} players
         </Text>
         <Menu>
           <MenuButton
@@ -141,13 +136,14 @@ export const WaitingRoom = (props: WaitingRoomType) => {
           base: "repeat(2, 1fr)",
           md: "repeat(auto-fill, minmax(235px, 1fr))",
         }}
+        width="100%"
         gap="20px"
         marginTop="25px"
       >
         {isLoading && <Spinner my="40px" />}
 
         {!isLoading &&
-          players.map((player: IPlayer, index: number) => (
+          players?.map((player: IPlayer, index: number) => (
             <PlayerCard key={index} player={player} selected={false} />
           ))}
       </SimpleGrid>
