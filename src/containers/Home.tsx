@@ -1,6 +1,8 @@
+import { PlayerPosition } from "assets/types";
 import { ChooseCards } from "components/ReadyForSeason/ChooseCards";
 import { ChoosePlayers } from "components/ReadyForSeason/ChoosePlayers";
 import { WaitingRoom } from "components/ReadyForSeason/WaitingRoom";
+import { useUserAuth } from "contexts/UserAuthContext";
 import { BlankLayout } from "layouts/Blank";
 import { ComponentType, useEffect, useState } from "react";
 
@@ -21,9 +23,21 @@ const componentsForReady: ComponentForReady = {
 };
 
 export const HomeContainer = () => {
+  const { status } = useUserAuth();
   const [step, setStep] = useState<Step>(Step.CHOOSE_CARDS);
 
   const CurrentComponent = componentsForReady[step];
+
+  useEffect(() => {
+    const completedChoosePlayers = Object.keys(
+      status?.playersConfig || {}
+    ).every(
+      (key) => status?.playersConfig?.[key as PlayerPosition].isSelectCompleted
+    );
+
+    if (completedChoosePlayers) return setStep(Step.WAITING_ROOM);
+    if (status?.isStaked) return setStep(Step.CHOOSE_PLAYERS);
+  }, [status]);
 
   return (
     <BlankLayout>

@@ -11,7 +11,7 @@ import {
 import { CardItem } from "./CardItem";
 // import { cards } from "assets/data/cards";
 import { Step } from "containers/Home";
-import { usePlayerCards } from "hooks/useGame";
+import { usePlayerCards, useStakeCards } from "hooks/useGame";
 import { Spin } from "components/common/Spinner";
 import { IPlayerCard } from "assets/types";
 import { useEffect, useState } from "react";
@@ -26,12 +26,14 @@ export const ChooseCards = (props: ChoseCardType) => {
   const [activeUniqueCardCount, setActiveUniqueCardCount] = useState(0);
   const [sumChoicePlayerCount, setSumChoicePlayerCount] = useState(0);
 
+  const stakeCards = useStakeCards();
+
   useEffect(() => {
     if (!cards || isLoading) return;
 
     const updatedFakeCards = cards.map((card: IPlayerCard) => ({
       ...card,
-      currentCount: Math.floor(Math.random() * 5),
+      currentCount: 1,
     }));
 
     setFakeCards(updatedFakeCards);
@@ -53,9 +55,7 @@ export const ChooseCards = (props: ChoseCardType) => {
     const activeUniqueCardCount = uniqueCards.length;
 
     setActiveUniqueCardCount(activeUniqueCardCount);
-  }, [fakeCards]);
 
-  useEffect(() => {
     const sumChoicePlayerCount = fakeCards.reduce(
       (acc: number, card: IPlayerCard) =>
         acc + card.choiceCount * (card.currentCount || 0),
@@ -64,6 +64,12 @@ export const ChooseCards = (props: ChoseCardType) => {
 
     setSumChoicePlayerCount(sumChoicePlayerCount);
   }, [fakeCards]);
+
+  const onSubmitForStake = async () => {
+    if (stakeCards.isLoading) return;
+
+    await stakeCards.mutateAsync();
+  };
 
   return (
     <Container
@@ -138,19 +144,17 @@ export const ChooseCards = (props: ChoseCardType) => {
         <Button
           padding="13px 40px"
           background="rgba(75, 165, 65, 0.89)"
+          _hover={{
+            background: "rgba(75, 165, 65, 1)",
+          }}
           borderRadius="4px"
-          onClick={() => setStep(Step.CHOOSE_PLAYERS)}
+          fontSize="16px"
+          fontWeight="700"
+          textTransform="uppercase"
+          isLoading={stakeCards.isLoading}
+          onClick={onSubmitForStake}
         >
-          <Text
-            fontSize="16px"
-            fontWeight="700"
-            lineHeight="20px"
-            color="#FFFFFF"
-            textTransform="uppercase"
-            display="inline"
-          >
-            STAKE ALL CARDS & CONTINUE
-          </Text>
+          Stake All Cards & Continue
         </Button>
       </Flex>
     </Container>

@@ -10,6 +10,7 @@ export enum PlayerCardType {
 /* Player Card */
 export interface IPlayerCard {
   _id: string;
+  key: string;
   name: string;
   image: string;
   choiceCount: number;
@@ -18,10 +19,44 @@ export interface IPlayerCard {
 }
 
 export enum PlayerPosition {
-  GOALKEEPER = "GOALKEEPER",
-  DEFENDER = "DEFENDER",
-  MIDFIELDER = "MIDFIELDER",
-  FORWARD = "FORWARD",
+  GOALKEEPER = "Goalkeeper",
+  DEFENDER = "Defender",
+  MIDFIELDER = "Midfielder",
+  FORWARD = "Forward",
+}
+
+export const PlayerPositionContext = {
+  [PlayerPosition.GOALKEEPER]: {
+    text: "Goalkeeper",
+    shortText: "GK",
+  },
+  [PlayerPosition.DEFENDER]: {
+    text: "Defender",
+    shortText: "DEF",
+  },
+  [PlayerPosition.MIDFIELDER]: {
+    text: "Midfielder",
+    shortText: "MID",
+  },
+  [PlayerPosition.FORWARD]: {
+    text: "Forward",
+    shortText: "FWD",
+  },
+};
+
+/* IPlayer */
+
+interface IDetails {
+  [key: string]: any;
+}
+export interface IPlayer {
+  _id: string;
+  key: string;
+  name?: string;
+  image?: string;
+  position?: PlayerPosition;
+  shortPosition?: string;
+  details: IDetails;
 }
 
 export type IChooseCard = {
@@ -89,14 +124,14 @@ export type IWizardForSeasonHeader = {
   href: string;
 };
 
-export type IPlayer = {
-  id: number;
-  position: string;
-  positionActive: boolean;
-  IsAvailable: boolean;
-  playerName: string;
-  isSelect: boolean;
-};
+// export type IPlayer = {
+//   id: number;
+//   position: string;
+//   positionActive: boolean;
+//   IsAvailable: boolean;
+//   playerName: string;
+//   isSelect: boolean;
+// };
 
 export type PlayerPropsType = {
   player: IPlayer;
@@ -113,4 +148,17 @@ export interface IUser {
   sanitizePublicKey: string;
   avatar: string;
   isAdmin: boolean;
+}
+
+export interface IPlayerConfig {
+  count: number;
+  isSelectCompleted: boolean;
+  playersToSelect: number;
+}
+
+export interface IStatus {
+  isStaked: boolean;
+  playersConfig?: {
+    [key in PlayerPosition]: IPlayerConfig;
+  };
 }
