@@ -104,7 +104,11 @@ const LoggedUserHeader = (props: LoggerUserHeaderProps) => {
 
       <Flex alignItems="center" gap="10px">
         {!!status?.selectedPlayersCount && (
-          <Flex gap="10px" alignItems="center">
+          <Flex
+            gap="10px"
+            alignItems="center"
+            display={{ base: "none", md: "flex" }}
+          >
             <Text
               color="#F4F4F4"
               fontSize="15px"

@@ -142,14 +142,17 @@ export const ChoosePlayers = (props: ChoosePlayersProps) => {
           background="rgba(0, 0, 0, 0.07)"
           border="1px solid rgba(255, 255, 255, 0.02)"
           width="100%"
-          justifyContent="space-between"
+          justifyContent={{ base: "center", md: "space-between" }}
           marginTop="40px"
           padding="15px 50px"
         >
           {Object.values(PlayerPosition).map((position, index) => (
             <Button
               key={index}
-              display="flex"
+              display={{
+                base: `${selectedPosition === position ? "block" : "none"}`,
+                md: "flex",
+              }}
               variant="unstyled"
               background="transparent"
               // onClick={() => onChangeSelectedPosition(position)}
@@ -169,7 +172,11 @@ export const ChoosePlayers = (props: ChoosePlayersProps) => {
 
           {!isLoading && (
             <>
-              <Flex width="100%">
+              <Flex
+                width="100%"
+                flexDirection={{ base: "column", md: "row" }}
+                justifyContent="space-between"
+              >
                 <Box>
                   <Text color="#54C748" fontWeight="500" fontSize="15px">
                     You have selected {selectedIds.length} {selectedPosition}{" "}
@@ -191,7 +198,6 @@ export const ChoosePlayers = (props: ChoosePlayersProps) => {
                   }}
                   textTransform="uppercase"
                   borderRadius="none"
-                  marginLeft="auto"
                   fontWeight="700"
                   isLoading={isLoading || submitPlayers.isLoading}
                   onClick={onSubmit}
