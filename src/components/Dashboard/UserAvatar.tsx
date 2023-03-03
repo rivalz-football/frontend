@@ -81,6 +81,15 @@ export const UserAvatar = (props: UserAvatarProps) => {
             {menu.name}
           </MenuItem>
         ))}
+        <MenuItem
+          background="transparent"
+          fontSize="15px"
+          fontWeight="600"
+          color="#90909C"
+          _hover={{ background: "transparent", color: "#fff" }}
+        >
+          Logout
+        </MenuItem>
       </MenuList>
     </Menu>
   );
