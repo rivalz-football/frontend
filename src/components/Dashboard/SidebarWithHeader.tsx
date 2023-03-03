@@ -31,7 +31,6 @@ import {
 import { Header } from "./Header";
 import { useSidebar } from "contexts/SidebarContext";
 
-
 interface SubMenuProps {
   name: string;
   icon: ReactElement;
@@ -41,10 +40,6 @@ interface SubMenuProps {
 interface MenuProps {
   name?: string;
   items: SubMenuProps[];
-}
-
-interface BottomMenuProps {
-  name: string;
 }
 
 const menu: Array<MenuProps> = [
@@ -68,24 +63,6 @@ const menu: Array<MenuProps> = [
         icon: <JackpotIcon />,
       },
     ],
-  },
-];
-
-const bottomMenu: BottomMenuProps[] = [
-  {
-    name: "Settings",
-  },
-  {
-    name: "Referral System",
-  },
-  {
-    name: "Help Center",
-  },
-  {
-    name: "Support",
-  },
-  {
-    name: "Logout",
   },
 ];
 
@@ -169,19 +146,6 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           background="linear-gradient(90deg, rgba(35, 35, 35, 0.85) 0%, rgba(35, 35, 35, 0) 100%)"
           width="70%"
         />
-
-        <Flex
-          direction="column"
-          padding="0 25px"
-          gap="10px"
-          display={`${isSidebarOpen ? "block" : "none"}`}
-        >
-          {bottomMenu.map((menu, index) => (
-            <Text key={index} fontWeight="500" fontSize="14px" color="#90909C">
-              {menu.name}
-            </Text>
-          ))}
-        </Flex>
       </Box>
     </Box>
   );

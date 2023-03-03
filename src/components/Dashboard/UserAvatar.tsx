@@ -13,6 +13,28 @@ type UserAvatarProps = {
   avatar: string;
 };
 
+interface AvatarMenuProps {
+  name: string;
+}
+
+const avatarMenu: AvatarMenuProps[] = [
+  {
+    name: "Settings",
+  },
+  {
+    name: "Referral System",
+  },
+  {
+    name: "Help Center",
+  },
+  {
+    name: "Support",
+  },
+  {
+    name: "Logout",
+  },
+];
+
 export const UserAvatar = (props: UserAvatarProps) => {
   const { avatar } = props;
 
@@ -31,16 +53,34 @@ export const UserAvatar = (props: UserAvatarProps) => {
         </HStack>
       </MenuButton>
       <MenuList
-        zIndex="3"
-        bg="rgba(11, 11, 11, 1)"
+        bg="rgb(17, 19, 21)"
         borderColor="#272B30"
+        marginRight="10px"
         padding="12px 16px 20px"
-        borderRadius="6px"
+        borderRadius="8px"
+        // zIndex="3"
+        minH="300px"
+        maxH="500px"
+        w={{
+          base: "100vw",
+          md: "500px",
+        }}
+        overflowY="auto"
+        position="relative"
       >
         <MenuDivider />
-        <MenuItem background="transparent" fontSize="15px" fontWeight="600">
-          Logout
-        </MenuItem>
+
+        {avatarMenu.map((menu, index) => (
+          <MenuItem
+            background="transparent"
+            fontSize="15px"
+            fontWeight="600"
+            color="#90909C"
+            _hover={{ background: "transparent", color: "#fff" }}
+          >
+            {menu.name}
+          </MenuItem>
+        ))}
       </MenuList>
     </Menu>
   );
