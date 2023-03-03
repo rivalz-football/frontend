@@ -59,8 +59,6 @@ export const UserAvatar = (props: UserAvatarProps) => {
         overflowY="auto"
         position="relative"
       >
-        <MenuDivider />
-
         {avatarMenu.map((menu, index) => (
           <MenuItem
             background="transparent"
@@ -72,6 +70,7 @@ export const UserAvatar = (props: UserAvatarProps) => {
             {menu.name}
           </MenuItem>
         ))}
+        <MenuDivider />
         <MenuItem
           background="transparent"
           fontSize="15px"
