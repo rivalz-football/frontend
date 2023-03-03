@@ -61,6 +61,7 @@ export const UserAvatar = (props: UserAvatarProps) => {
       >
         {avatarMenu.map((menu, index) => (
           <MenuItem
+            key={index}
             background="transparent"
             fontSize="15px"
             fontWeight="600"
