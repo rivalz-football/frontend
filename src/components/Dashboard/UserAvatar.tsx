@@ -31,6 +31,7 @@ export const UserAvatar = (props: UserAvatarProps) => {
         </HStack>
       </MenuButton>
       <MenuList
+        zIndex="3"
         bg="rgba(11, 11, 11, 1)"
         borderColor="#272B30"
         padding="12px 16px 20px"
