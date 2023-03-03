@@ -58,13 +58,7 @@ export const UserAvatar = (props: UserAvatarProps) => {
         marginRight="10px"
         padding="12px 16px 20px"
         borderRadius="8px"
-        // zIndex="3"
-        minH="300px"
-        maxH="500px"
-        w={{
-          base: "100vw",
-          md: "500px",
-        }}
+        zIndex="3"
         overflowY="auto"
         position="relative"
       >
