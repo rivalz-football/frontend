@@ -30,9 +30,6 @@ const avatarMenu: AvatarMenuProps[] = [
   {
     name: "Support",
   },
-  {
-    name: "Logout",
-  },
 ];
 
 export const UserAvatar = (props: UserAvatarProps) => {
