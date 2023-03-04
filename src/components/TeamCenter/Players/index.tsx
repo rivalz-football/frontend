@@ -17,23 +17,23 @@ import { PlayerPosition } from "assets/types";
 
 export const Players = () => {
   return (
-    <Flex width="460px">
+    <Flex>
       <Box
-        height="100%"
+        maxHeight="742px"
         width="7px"
         bg="#040404"
         clipPath="polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px, 10px 0)"
       ></Box>
       <Box
-        width="100%"
         maxHeight="600px"
-        maxWidth="449px"
-        padding="22px 26px"
         border="1px solid #000000;"
         bg="#0C0B0B"
+        maxWidth="449px"
+        padding="22px 26px"
+        justifyContent="space-between"
         overflow="auto"
       >
-        <Flex justifyContent="space-between">
+        <Flex width="25rem" justifyContent="space-between">
           <Text
             fontSize="22px"
             fontWeight="500"

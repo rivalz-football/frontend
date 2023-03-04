@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { FootballArea } from "components/TeamCenter/FootballArea";
 import { Players } from "components/TeamCenter/Players";
 import { DashboardLayout } from "layouts/Dashboard";
@@ -13,8 +13,15 @@ export const TeamCenterContainer = () => {
         You can include and remove your players in your weekly team
       </Text>
 
-      <Flex marginTop="30px" justifyContent="space-between">
-        <FootballArea />
+      <Flex
+        marginTop="30px"
+        justifyContent="space-between"
+        direction={{ base: "column", md: "row" }}
+      >
+        <Flex width={{ base: "80vw", md: "50%" }}>
+          <FootballArea />
+        </Flex>
+
         <Players />
       </Flex>
     </DashboardLayout>

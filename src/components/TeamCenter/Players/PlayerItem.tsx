@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, Icon, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Image, Text } from "@chakra-ui/react";
 import { OutlineDots } from "assets/icons";
 
 import { MyTeamTypes } from "./data/typeProps";
@@ -27,7 +27,7 @@ export const PlayerItem = (props: MyTeamsProps) => {
       background="#111111"
     >
       <Flex gap="25px">
-        <img
+        <Image
           height="40px"
           width="40px"
           style={{ borderRadius: "4px" }}
