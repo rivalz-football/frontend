@@ -132,7 +132,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         p="0 25px 35px 25px"
       >
         <NextLink href="/dashboard">
-          <Logo />
+          <Logo isTextVisible={isSidebarOpen} />
         </NextLink>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
