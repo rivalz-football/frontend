@@ -4,6 +4,8 @@ import LoginImage from "./login.png";
 import LoginBackgroundImage from "./login-background.png";
 import PlayerBackgroundImage from "./player-card-bg.png";
 import FootballAreaBg from "./football-area-bg.png";
+import TransactionBackgroundImage from "./transaction-bg.png";
+import SolscanImage from "./solscan.png";
 
 export {
   LogoImage,
@@ -12,4 +14,6 @@ export {
   LoginBackgroundImage,
   PlayerBackgroundImage,
   FootballAreaBg,
+  TransactionBackgroundImage,
+  SolscanImage,
 };
