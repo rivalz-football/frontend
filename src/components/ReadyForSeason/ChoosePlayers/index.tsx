@@ -152,7 +152,6 @@ export const ChoosePlayers = (props: ChoosePlayersProps) => {
               display="flex"
               variant="unstyled"
               background="transparent"
-              // onClick={() => onChangeSelectedPosition(position)}
               opacity={selectedPosition === position ? 1 : 0.15}
               color={selectedPosition === position ? "#EC068D" : ""}
               _hover={{ color: selectedPosition === position ? "#EC068D" : "" }}
