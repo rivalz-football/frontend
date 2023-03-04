@@ -1,8 +1,8 @@
 export const Area = () => {
   return (
     <svg
-      width="803"
-      height="497"
+      height="100%"
+      width="100%"
       viewBox="0 0 803 497"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
