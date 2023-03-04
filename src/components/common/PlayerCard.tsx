@@ -24,6 +24,7 @@ export const PlayerCard = (props: PlayerCardProps) => {
       cursor="pointer"
       onClick={onClick}
       backgroundImage={`url(${PlayerBackgroundImage.src})`}
+      maxWidth="235px"
       height="320px"
       backgroundSize="cover"
       position="relative"

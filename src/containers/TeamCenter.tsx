@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { FootballArea } from "components/TeamCenter/FootballArea";
 import { Players } from "components/TeamCenter/Players";
 import { DashboardLayout } from "layouts/Dashboard";

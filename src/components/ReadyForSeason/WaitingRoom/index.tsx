@@ -17,7 +17,6 @@ import ArrowUpIcon from "assets/icons/arrow-up.svg";
 
 import { Step } from "containers/Home";
 import { PlayerPosition } from "assets/types";
-// import { PlayerCards } from "assets/data/playerCards";
 import { PlayerCard } from "components/common/PlayerCard";
 import { useMePlayers } from "hooks/useUser";
 import { IPlayer } from "assets/types";

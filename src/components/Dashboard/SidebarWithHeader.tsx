@@ -129,7 +129,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         h="20"
         alignItems="center"
         justifyContent="space-between"
-        p="0 25px 35px 25px"
+        p="0 25px 60px 25px"
       >
         <NextLink href="/dashboard">
           <Logo isTextVisible={isSidebarOpen} />
