@@ -1,4 +1,5 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { numberFormat } from "plugins/number-format";
 
 type BalanceProps = {
   balance: number;
@@ -18,10 +19,10 @@ export const UserBalance = (props: BalanceProps) => {
       border="1px solid rgba(255, 255, 255, 0.02)"
       borderRadius="4px"
     >
-      <Image src={image} />
+      <Image src={image} height="20px" />
       <Box fontSize="15px">
         <Text display="inline-block" fontWeight="bold">
-          {balance}&nbsp;
+          {numberFormat(balance)}&nbsp;
         </Text>
         <Text display="inline-block">{name}</Text>
       </Box>

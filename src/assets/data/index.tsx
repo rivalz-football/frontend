@@ -5,6 +5,8 @@ export const SIDEBAR_WIDTH_FULL = "240px";
 export const HEADER_HEIGHT = "70px";
 export const FOOTER_HEIGHT = "50px";
 
+export const SOL_MINT_ADDRESS = "11111111111111111111111111111111";
+
 export const leaderboard: ILeaderboard = {
   others: [
     {
