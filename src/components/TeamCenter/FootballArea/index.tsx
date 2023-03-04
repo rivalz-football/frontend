@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { Area } from "./Area";
 import { FootballAreaBg } from "assets/images";
 
 export const FootballArea = () => {
   return (
     <Flex
+      maxHeight="642px"
       direction="column"
       justifyContent="center"
       alignItems="center"
@@ -36,8 +37,8 @@ export const FootballArea = () => {
         border="1px solid rgba(255, 255, 255, 0.09)"
         borderRadius=" 4px"
         position="absolute"
-        right="23px"
-        top="15px"
+        right="30px"
+        top="0px"
       >
         SHARE YOUR TEAM
       </Button>
