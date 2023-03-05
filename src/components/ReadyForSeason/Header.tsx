@@ -107,7 +107,7 @@ const LoggedUserHeader = (props: LoggerUserHeaderProps) => {
       </Button>
 
       <Flex alignItems="center" gap="10px">
-        {!!status?.selectedPlayersCount && (
+        {!!status?.maxSelectablePlayersCount && (
           <Flex gap="10px" alignItems="center">
             <Text
               color="#F4F4F4"
@@ -119,7 +119,7 @@ const LoggedUserHeader = (props: LoggerUserHeaderProps) => {
             </Text>
             <Box padding="7px 14px" background="rgba(236, 6, 141, 0.65)">
               <Text fontSize="20px" fontWeight="700">
-                {status.selectedPlayersCount}
+                {status.maxSelectablePlayersCount}
               </Text>
             </Box>
           </Flex>

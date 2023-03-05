@@ -20,12 +20,14 @@ import { PlayerPosition } from "assets/types";
 import { PlayerCard } from "components/common/PlayerCard";
 import { useMePlayers } from "hooks/useUser";
 import { IPlayer } from "assets/types";
+import { useUserAuth } from "contexts/UserAuthContext";
 
 type WaitingRoomType = {
   setStep: (step: Step) => void;
 };
 
 export const WaitingRoom = (props: WaitingRoomType) => {
+  const { user } = useUserAuth();
   const { setStep } = props;
   const { data: players, isLoading } = useMePlayers();
 
@@ -43,7 +45,7 @@ export const WaitingRoom = (props: WaitingRoomType) => {
         color="#FFFFFF"
         textTransform="uppercase"
       >
-        CONGRATS! DAGGEX
+        Congrats! {user?.sanitizePublicKey}
       </Text>
       <Text
         lineHeight="23px"
