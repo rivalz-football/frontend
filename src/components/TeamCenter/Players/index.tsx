@@ -17,7 +17,7 @@ import { PlayerPosition } from "assets/types";
 
 export const Players = () => {
   return (
-    <Flex>
+    <Flex minWidth="fit-content">
       <Box
         maxHeight="742px"
         width="7px"

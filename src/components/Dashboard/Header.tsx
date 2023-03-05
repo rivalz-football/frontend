@@ -17,11 +17,13 @@ import {
 import { DownArrowIcon, GiftIcon, NotificationIcon } from "assets/icons";
 import { SolanaImage } from "assets/images";
 import { useSidebar } from "contexts/SidebarContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Notification } from "./Notification";
 import { UserAvatar } from "./UserAvatar";
 import { UserBalance } from "./UserBalance";
 import { CgArrowsExchange } from "react-icons/cg";
+import { CSSTransition } from "react-transition-group";
+
 import { TransactionPopup } from "components/common/TransactionPopup";
 import { useTokens } from "hooks/useToken";
 import { IToken, IUserToken } from "assets/types";
@@ -37,8 +39,17 @@ export const Header = () => {
     <>
       <CgArrowsExchange
         onClick={toggleSidebar}
-        style={{ width: "30px", height: "30px" }}
+        style={{
+          width: "35px",
+          height: "35px",
+          cursor: "pointer",
+          background: "rgb(70, 65, 65)",
+          borderRadius: "5px",
+          padding: "5px",
+          opacity: 0.8,
+        }}
       />
+
       <Flex alignItems="center" gap="15px">
         <Button
           background="rgba(217, 217, 217, 0.01)"

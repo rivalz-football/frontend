@@ -18,7 +18,7 @@ export const TeamCenterContainer = () => {
         justifyContent="space-between"
         direction={{ base: "column", md: "row" }}
       >
-        <Flex width={{ base: "80vw", md: "50%" }}>
+        <Flex width="100%">
           <FootballArea />
         </Flex>
 

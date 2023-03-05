@@ -25,6 +25,7 @@ export const PlayerItem = (props: MyTeamsProps) => {
         background: "#319044",
       }}
       background="#111111"
+      gap="20px"
     >
       <Flex gap="25px">
         <Image
