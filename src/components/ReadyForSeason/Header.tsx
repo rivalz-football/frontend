@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Flex,
@@ -21,6 +22,7 @@ import NextLink from "next/link";
 import { useUserAuth } from "contexts/UserAuthContext";
 import { ArrowBackIcon, ArrowLeftIcon } from "@chakra-ui/icons";
 import { IUser } from "assets/types";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export const Header = () => {
   const { user, logout } = useUserAuth();
@@ -84,8 +86,10 @@ type LoggerUserHeaderProps = {
 
 const LoggedUserHeader = (props: LoggerUserHeaderProps) => {
   const { user, logout } = props;
+  const { wallet } = useWallet();
 
   const { status } = useUserAuth();
+  const walletIcon = wallet?.adapter.icon as string;
 
   return (
     <Flex alignItems="center" justifyContent="space-between">
@@ -131,6 +135,12 @@ const LoggedUserHeader = (props: LoggerUserHeaderProps) => {
             padding="10px 20px"
           >
             <HStack>
+              <Avatar
+                height="25px"
+                width="25px"
+                src={walletIcon}
+                mixBlendMode="luminosity"
+              />
               <VStack
                 display="flex"
                 alignItems="flex-start"
