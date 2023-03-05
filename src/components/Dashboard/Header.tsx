@@ -51,7 +51,7 @@ export const Header = () => {
         >
           Withdraw
         </Button>
-        {!isLoading && (
+        {!isLoading && token && (
           <UserBalance
             image={token.information.image}
             name={token.information.symbol}

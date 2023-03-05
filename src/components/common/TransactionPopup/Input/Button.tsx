@@ -6,10 +6,11 @@ type TransactionButtonProps = {
   label: string;
   onClick: () => void;
   isLoading: boolean;
+  isDisabled: boolean;
 };
 
 export const TransactionButton = (props: TransactionButtonProps) => {
-  const { icon, label, onClick, isLoading } = props;
+  const { icon, label, onClick, isLoading, isDisabled } = props;
 
   const Icon = icon;
 
@@ -21,6 +22,7 @@ export const TransactionButton = (props: TransactionButtonProps) => {
       borderRadius="5px"
       onClick={onClick}
       isLoading={isLoading}
+      isDisabled={isDisabled}
       maxWidth="50%"
     >
       <span

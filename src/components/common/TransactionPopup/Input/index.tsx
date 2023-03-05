@@ -35,21 +35,21 @@ export const TransactionInput = (props: TransactionInputProps) => {
   const queryClient = useQueryClient();
 
   const onSubmit = async (type: TransactionType) => {
-    if (!wallet) return;
+    if (!wallet || !amount) return;
 
     try {
       if (type === TransactionType.DEPOSIT) {
         setIsDepositLoading(true);
         await createDepositTx(
           wallet,
-          token.information.mintAddress,
+          token?.information?.mintAddress || SOL_MINT_ADDRESS,
           Number(amount)
         );
       } else {
         setIsWithdrawLoading(true);
         await createWithdrawTx(
           wallet,
-          token.information.mintAddress,
+          token?.information?.mintAddress || SOL_MINT_ADDRESS,
           Number(amount)
         );
       }
@@ -112,7 +112,8 @@ export const TransactionInput = (props: TransactionInputProps) => {
       </Text>
 
       <Text fontSize="35px" fontWeight="700" textTransform="uppercase">
-        {numberFormat(token.balance)}{" "}
+        {/* TODO: dynamic */}
+        {numberFormat(token?.balance)}{" "}
         <Text
           as="span"
           sx={{
@@ -121,7 +122,8 @@ export const TransactionInput = (props: TransactionInputProps) => {
             WebkitTextFillColor: "transparent",
           }}
         >
-          {token.information.symbol}
+          {/* TODO: dynamic */}
+          {token?.information?.symbol || "SOL"}
         </Text>
       </Text>
       <InputGroup
@@ -168,12 +170,14 @@ export const TransactionInput = (props: TransactionInputProps) => {
           label="Deposit"
           onClick={() => onSubmit(TransactionType.DEPOSIT)}
           isLoading={isDepositLoading}
+          isDisabled={!amount}
         />
         <TransactionButton
           icon={GreenUpArrowIcon}
           label="Withdraw"
           onClick={() => onSubmit(TransactionType.WITHDRAW)}
           isLoading={isWithdrawLoading}
+          isDisabled={!amount}
         />
       </Flex>
     </Flex>
