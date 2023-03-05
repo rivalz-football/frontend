@@ -17,7 +17,7 @@ import { PlayerPosition } from "assets/types";
 
 export const Players = () => {
   return (
-    <Flex>
+    <Flex minWidth="fit-content">
       <Box
         maxHeight="742px"
         width="7px"
@@ -33,7 +33,7 @@ export const Players = () => {
         justifyContent="space-between"
         overflow="auto"
       >
-        <Flex width="25rem" justifyContent="space-between">
+        <Flex justifyContent="space-between" width="100%">
           <Text
             fontSize="22px"
             fontWeight="500"

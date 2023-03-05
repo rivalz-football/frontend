@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import axios from "plugins/axios";
+import { TransactionType } from "assets/types";
 
 export const useAuthMe = () => {
   return useQuery(
@@ -23,6 +24,41 @@ export const useAuthLogout = () => {
 
     return data;
   });
+};
+
+export const useMeTokens = (mintAddress?: string) => {
+  return useQuery(
+    ["meTokens"],
+    async () => {
+      const { data } = await axios.get(`/auth/me/tokens`, {
+        params: {
+          mintAddress,
+        },
+      });
+      return data;
+    },
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+};
+
+export const useMeTransactions = (type?: TransactionType) => {
+  return useQuery(
+    ["meTransactions", type],
+    async () => {
+      const { data } = await axios.get(
+        "/auth/me/transactions",
+        type ? { params: { type } } : undefined
+      );
+      return data;
+    },
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 export const useMeStatus = (enabled: boolean) => {

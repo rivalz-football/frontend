@@ -1,4 +1,5 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, useDisclosure } from "@chakra-ui/react";
+import { TransactionPopup } from "components/common/TransactionPopup";
 import { Banners } from "components/Dashboard/Banners";
 import { Histories } from "components/Dashboard/Histories";
 import { LeaderboardList } from "components/Dashboard/Leaderboard";

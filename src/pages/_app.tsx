@@ -19,6 +19,7 @@ import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { useCluster } from "hooks/useCluster";
 import { Spin } from "components/common/Spinner";
+import Head from "next/head";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,9 @@ const Inner = ({ Component, pageProps }: AppProps) => {
 
   return (
     <ConnectionProvider endpoint={endpoint}>
+      <Head>
+        <title>RivalZ</title>
+      </Head>
       <Chakra cookies={pageProps.cookies}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>

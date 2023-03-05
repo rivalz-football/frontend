@@ -11,6 +11,8 @@ import GiftIcon from "./gift.svg";
 import NotificationIcon from "./notification.svg";
 import OutlineDots from "./outline-dots.svg";
 import FilterSmallIcon from "./filter-small-icon.svg";
+import GreenUpArrowIcon from "./green-up-arrow.svg";
+import RedDownArrowIcon from "./red-down-arrow.svg";
 
 export {
   CategoryIcon,
@@ -26,4 +28,6 @@ export {
   NotificationIcon,
   OutlineDots,
   FilterSmallIcon,
+  GreenUpArrowIcon,
+  RedDownArrowIcon,
 };

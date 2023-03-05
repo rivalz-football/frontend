@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { FootballArea } from "components/TeamCenter/FootballArea";
 import { Players } from "components/TeamCenter/Players";
 import { DashboardLayout } from "layouts/Dashboard";
@@ -18,7 +18,7 @@ export const TeamCenterContainer = () => {
         justifyContent="space-between"
         direction={{ base: "column", md: "row" }}
       >
-        <Flex width={{ base: "80vw", md: "50%" }}>
+        <Flex width="100%">
           <FootballArea />
         </Flex>
 

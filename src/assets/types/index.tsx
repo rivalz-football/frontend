@@ -164,3 +164,45 @@ export interface IStatus {
   maxSelectablePlayersCount?: number;
   selectedPlayersCount?: number;
 }
+
+/* Transaction status */
+export interface ITransaction {
+  amount: number;
+  signature: string;
+  status?: TransactionStatus;
+  type: TransactionType;
+  errorMessage?: string;
+  createdAt: number;
+}
+
+export enum TransactionStatus {
+  PENDING = "PENDING",
+  CONFIRMED = "CONFIRMED",
+  FAILED = "FAILED",
+}
+
+export enum TransactionType {
+  DEPOSIT = "DEPOSIT",
+  WITHDRAW = "WITHDRAW",
+}
+
+export interface IToken {
+  _id: string;
+  name: string;
+  image: string;
+  decimals: number;
+  order: number;
+  mintAddress: string;
+  coinMarketCapId: number;
+  symbol: string;
+  symbolPrefix: string;
+  type: string;
+  isNft: boolean;
+  isShowHeader: boolean;
+}
+
+export interface IUserToken {
+  _id: string;
+  information: IToken;
+  balance: number;
+}

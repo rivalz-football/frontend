@@ -1,6 +1,5 @@
 import { Flex, Image, Text } from "@chakra-ui/react";
 import { LogoImage } from "assets/images";
-import { useSidebar } from "contexts/SidebarContext";
 
 type LogoProps = {
   isTextVisible?: boolean;
