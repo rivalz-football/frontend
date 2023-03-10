@@ -1,16 +1,18 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { FootballArea } from "components/TeamCenter/FootballArea";
-import { Players } from "components/TeamCenter/Players";
+import { RecentPlays } from "components/Goalflip/History";
 import { DashboardLayout } from "layouts/Dashboard";
-import { Area } from "components/TeamCenter/FootballArea/Area";
-export const TeamCenterContainer = () => {
+import { GoalFlipArea } from "components/TeamCenter/FootballArea/GoalFlipArea";
+
+export const GoalFlipContainer = () => {
   return (
     <DashboardLayout>
       <Text fontWeight="600" fontSize="28px" textTransform="uppercase">
-        Team Center
+        Goal Flip
       </Text>
       <Text fontWeight="500">
-        You can include and remove your players in your weekly team
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry.
       </Text>
 
       <Flex
@@ -19,10 +21,10 @@ export const TeamCenterContainer = () => {
         direction={{ base: "column", md: "row" }}
       >
         <Flex width="100%">
-          <FootballArea showButton Area={Area} />
+          <FootballArea Area={GoalFlipArea} />
         </Flex>
 
-        <Players />
+        <RecentPlays />
       </Flex>
     </DashboardLayout>
   );
