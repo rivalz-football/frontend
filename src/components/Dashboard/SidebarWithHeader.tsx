@@ -124,6 +124,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       overflow="auto"
       padding="35px 0px"
       {...rest}
+      zIndex="9"
     >
       <Flex
         h="20"

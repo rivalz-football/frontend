@@ -19,7 +19,7 @@ export const GoalFlipContainer = () => {
       <Flex
         marginTop="30px"
         justifyContent="space-between"
-        direction={{ base: "column", md: "row" }}
+        direction={{ sm: "column", md: "row" }}
       >
         <Flex
           width="100%"
