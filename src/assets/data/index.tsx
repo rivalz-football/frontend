@@ -80,4 +80,46 @@ export const fakePlays: PlaysType[] = [
     position: "right",
     time: 10,
   },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
 ];

@@ -19,7 +19,7 @@ export const TeamCenterContainer = () => {
         direction={{ base: "column", md: "row" }}
       >
         <Flex width="100%">
-          <FootballArea showButton Area={Area} />
+          <FootballArea />
         </Flex>
 
         <Players />

@@ -1,8 +1,9 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { FootballArea } from "components/TeamCenter/FootballArea";
+import {} from "components/TeamCenter/FootballArea";
 import { RecentPlays } from "components/Goalflip/History";
 import { DashboardLayout } from "layouts/Dashboard";
-import { GoalFlipArea } from "components/TeamCenter/FootballArea/GoalFlipArea";
+import { GoalFlipArea } from "components/Goalflip/GoalFlipArea";
+import { BetSection } from "components/Goalflip/BetSection";
 
 export const GoalFlipContainer = () => {
   return (
@@ -20,8 +21,16 @@ export const GoalFlipContainer = () => {
         justifyContent="space-between"
         direction={{ base: "column", md: "row" }}
       >
-        <Flex width="100%">
-          <FootballArea Area={GoalFlipArea} />
+        <Flex
+          width="100%"
+          position="relative"
+          justifyContent="center"
+          flexDirection="column"
+          alignItems="center"
+          gap="27px"
+        >
+          <GoalFlipArea />
+          <BetSection />
         </Flex>
 
         <RecentPlays />

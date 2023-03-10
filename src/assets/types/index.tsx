@@ -209,11 +209,6 @@ export interface IUserToken {
   balance: number;
 }
 
-export type FutbolAreaProps = {
-  Area: () => JSX.Element;
-  showButton?: boolean | false;
-};
-
 export type PlaysType = {
   username: string;
   cornerSide: string;
