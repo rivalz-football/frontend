@@ -47,6 +47,7 @@ export const GoalFlipArea = (props: GoalFlipAreaProps) => {
         style={{
           position: "absolute",
           top: "-100px",
+          transform: "scaleX(-1)",
         }}
         options={{
           animationData: animation.data,

@@ -28,10 +28,9 @@ export const GoalFlipContainer = () => {
   const [bet, setBet] = useState(0.1);
 
   const [animation, setAnimation] = useState<AnimationProps>({
-    isPlaying: false,
+    isPlaying: true,
     data: Animation[corner],
   });
-
   const { programInformation } = useGoalFlipClient();
   const play = usePlay();
 
@@ -46,7 +45,7 @@ export const GoalFlipContainer = () => {
     });
 
     setAnimation({
-      isPlaying: true,
+      isPlaying: false,
       data: Animation[corner],
     });
   };
