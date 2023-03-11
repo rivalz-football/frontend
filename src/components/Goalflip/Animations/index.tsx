@@ -57,8 +57,9 @@ export const PlayerWinAnimation = (props: GoalFlipAnimationProps) => {
 
   useEffect(() => {
     if (currentStep === Step.WIN_AMOUNT_ANIMATION)
-      setInterval(() => {
+      setTimeout(() => {
         setAnimation({ ...animation, isPlaying: false });
+        setCurrentStep(Step.GOAL_KICK_ANIMATION);
       }, 1000 * 5);
   }, [currentStep]);
 
@@ -85,9 +86,8 @@ export const PlayerWinAnimation = (props: GoalFlipAnimationProps) => {
               callback: () => {
                 if (currentStep === Step.GOAL_KICK_ANIMATION)
                   setCurrentStep(Step.GOAL_SCORED_ANIMATION);
-                else if (currentStep === Step.GOAL_SCORED_ANIMATION) {
+                else if (currentStep === Step.GOAL_SCORED_ANIMATION)
                   setCurrentStep(Step.WIN_AMOUNT_ANIMATION);
-                }
               },
             },
           ]}
