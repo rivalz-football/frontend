@@ -21,6 +21,7 @@ const Animation = {
 export type AnimationProps = {
   isPlaying: boolean;
   data: any;
+  isRight?: boolean;
 };
 
 export const GoalFlipContainer = () => {
@@ -28,25 +29,26 @@ export const GoalFlipContainer = () => {
   const [bet, setBet] = useState(0.1);
 
   const [animation, setAnimation] = useState<AnimationProps>({
-    isPlaying: true,
+    isPlaying: false,
     data: Animation[corner],
   });
   const { programInformation } = useGoalFlipClient();
   const play = usePlay();
 
   const onSubmit = async () => {
-    if (!programInformation || !corner || !bet) return;
+    // if (!programInformation || !corner || !bet) return;
 
-    await play.mutateAsync({
-      corner,
-      position: Position.Forward,
-      betAmount: bet,
-      game: programInformation?.footballAccountAddress,
-    });
+    // await play.mutateAsync({
+    //   corner,
+    //   position: Position.Forward,
+    //   betAmount: bet,
+    //   game: programInformation?.footballAccountAddress,
+    // });
 
     setAnimation({
-      isPlaying: false,
+      isPlaying: true,
       data: Animation[corner],
+      isRight: corner === Corner.Right,
     });
   };
 
