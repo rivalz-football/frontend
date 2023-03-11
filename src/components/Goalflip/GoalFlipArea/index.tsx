@@ -2,8 +2,17 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { FootballAreaBg } from "assets/images";
 import { Area } from "./Area";
 import { PenaltyBallIcon, PenaltyStartingPointIcon } from "assets/icons";
+import Lottie from "react-lottie";
+import { AnimationProps } from "containers/GoalFlip";
 
-export const GoalFlipArea = () => {
+type GoalFlipAreaProps = {
+  animation: AnimationProps;
+  setAnimation: (animation: AnimationProps) => void;
+};
+
+export const GoalFlipArea = (props: GoalFlipAreaProps) => {
+  const { animation, setAnimation } = props;
+
   return (
     <Flex
       maxHeight="642px"
@@ -16,17 +25,44 @@ export const GoalFlipArea = () => {
       width="100%"
     >
       <Area />
-      <PenaltyStartingPointIcon
+
+      {!animation.isPlaying && (
+        <>
+          <PenaltyStartingPointIcon
+            style={{
+              position: "absolute",
+              bottom: "30px",
+            }}
+          />
+          <PenaltyBallIcon
+            style={{
+              position: "absolute",
+              bottom: "33px",
+            }}
+          />
+        </>
+      )}
+
+      <Lottie
         style={{
           position: "absolute",
-          bottom: "30px",
+          top: "-100px",
         }}
-      />
-      <PenaltyBallIcon
-        style={{
-          position: "absolute",
-          bottom: "33px",
+        options={{
+          animationData: animation.data,
+          loop: false,
         }}
+        isStopped={!animation.isPlaying}
+        isClickToPauseDisabled
+        eventListeners={[
+          {
+            eventName: "complete",
+            callback: () => {
+              console.log("complete");
+              setAnimation({ isPlaying: false, data: animation.data });
+            },
+          },
+        ]}
       />
     </Flex>
   );
