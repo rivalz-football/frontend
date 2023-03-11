@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Lottie from "react-lottie";
 
 import goalAnimationJson from "assets/animations/goal.json";
+import { PenalyPosition } from "./PenaltyPosition";
 
 export type GoalFlipAnimationProps = {
   animation: AnimationProps;
@@ -13,32 +14,7 @@ export type GoalFlipAnimationProps = {
 export const BotWinAnimation = (props: GoalFlipAnimationProps) => {
   const { animation, setAnimation } = props;
 
-  return (
-    <Lottie
-      style={{
-        position: "absolute",
-        top: "0",
-        transform: animation.isRight ? "scaleX(-1)" : "scaleX(1)",
-      }}
-      options={{
-        animationData: animation.data,
-        loop: false,
-      }}
-      height="250px"
-      width="250px"
-      isStopped={!animation.isPlaying}
-      isClickToPauseDisabled
-      eventListeners={[
-        {
-          eventName: "complete",
-          callback: () => {
-            console.log("complete");
-            setAnimation({ ...animation, isPlaying: false });
-          },
-        },
-      ]}
-    />
-  );
+  return <PenalyPosition animation={animation} setAnimation={setAnimation} />;
 };
 
 enum Step {
@@ -66,32 +42,7 @@ export const PlayerWinAnimation = (props: GoalFlipAnimationProps) => {
   return (
     <>
       {animationData && (
-        <Lottie
-          style={{
-            position: "absolute",
-            top: "0",
-            // transform: animation.isRight ? "scaleX(-1)" : "scaleX(1)",
-          }}
-          options={{
-            animationData,
-            loop: false,
-          }}
-          height="250px"
-          width="250px"
-          isStopped={!animation.isPlaying}
-          isClickToPauseDisabled
-          eventListeners={[
-            {
-              eventName: "complete",
-              callback: () => {
-                if (currentStep === Step.GOAL_KICK_ANIMATION)
-                  setCurrentStep(Step.GOAL_SCORED_ANIMATION);
-                else if (currentStep === Step.GOAL_SCORED_ANIMATION)
-                  setCurrentStep(Step.WIN_AMOUNT_ANIMATION);
-              },
-            },
-          ]}
-        />
+        <PenalyPosition animation={animation} setAnimation={setAnimation} />
       )}
 
       {currentStep === Step.WIN_AMOUNT_ANIMATION && (

@@ -44,8 +44,10 @@ export const GoalFlipArea = (props: GoalFlipAreaProps) => {
         </>
       )}
 
-      {animation.isPlaying && (
+      {animation.isPlaying && animation.isRight ? (
         <PlayerWinAnimation animation={animation} setAnimation={setAnimation} />
+      ) : (
+        <BotWinAnimation animation={animation} setAnimation={setAnimation} />
       )}
     </Flex>
   );

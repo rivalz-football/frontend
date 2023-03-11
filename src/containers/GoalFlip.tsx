@@ -22,6 +22,8 @@ export type AnimationProps = {
   isPlaying: boolean;
   data: any;
   isRight?: boolean;
+  ballPosition?: Corner;
+  goalKeeperPosition?: Corner;
 };
 
 export const GoalFlipContainer = () => {
@@ -49,6 +51,8 @@ export const GoalFlipContainer = () => {
       isPlaying: true,
       data: Animation[corner],
       isRight: corner === Corner.Right,
+      ballPosition: Corner.Right,
+      goalKeeperPosition: Corner.Left,
     });
   };
 
