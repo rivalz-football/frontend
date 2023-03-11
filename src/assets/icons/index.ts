@@ -13,6 +13,8 @@ import OutlineDots from "./outline-dots.svg";
 import FilterSmallIcon from "./filter-small-icon.svg";
 import GreenUpArrowIcon from "./green-up-arrow.svg";
 import RedDownArrowIcon from "./red-down-arrow.svg";
+import PenaltyBallIcon from "./penalty-ball.svg";
+import PenaltyStartingPointIcon from "./penalty-starting-point.svg";
 
 export {
   CategoryIcon,
@@ -30,4 +32,6 @@ export {
   FilterSmallIcon,
   GreenUpArrowIcon,
   RedDownArrowIcon,
+  PenaltyBallIcon,
+  PenaltyStartingPointIcon,
 };

@@ -1,5 +1,5 @@
 import { Button, Text } from "@chakra-ui/react";
-import { ComponentType, ReactElement } from "react";
+import { ComponentType } from "react";
 
 type TransactionButtonProps = {
   icon: ComponentType;

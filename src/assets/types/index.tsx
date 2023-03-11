@@ -1,4 +1,6 @@
 import { StaticImageData } from "next/image";
+import { Component, ReactComponentElement } from "react";
+import { JsxElement } from "typescript";
 
 export enum PlayerCardType {
   BEGINNER = "BEGINNER",
@@ -206,3 +208,14 @@ export interface IUserToken {
   information: IToken;
   balance: number;
 }
+
+export type PlaysType = {
+  username: string;
+  cornerSide: string;
+  position: string;
+  time: number;
+};
+
+export type PlaysPropsType = {
+  plays: PlaysType;
+};

@@ -1,4 +1,4 @@
-import { ILeaderboard, IWizardForSeasonHeader } from "assets/types";
+import { ILeaderboard, IWizardForSeasonHeader, PlaysType } from "assets/types";
 
 export const SIDEBAR_WIDTH_SMALL = "75px";
 export const SIDEBAR_WIDTH_FULL = "240px";
@@ -58,5 +58,68 @@ export const wizardForSeasonHeader: IWizardForSeasonHeader[] = [
   {
     label: "Goal Flip",
     href: "/goal-flip",
+  },
+];
+
+export const fakePlays: PlaysType[] = [
+  {
+    username: "Daggex",
+    cornerSide: "left",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "left",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
+  },
+  {
+    username: "Daggex",
+    cornerSide: "right",
+    position: "right",
+    time: 10,
   },
 ];

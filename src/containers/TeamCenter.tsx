@@ -2,7 +2,7 @@ import { Flex, Text } from "@chakra-ui/react";
 import { FootballArea } from "components/TeamCenter/FootballArea";
 import { Players } from "components/TeamCenter/Players";
 import { DashboardLayout } from "layouts/Dashboard";
-
+import { Area } from "components/TeamCenter/FootballArea/Area";
 export const TeamCenterContainer = () => {
   return (
     <DashboardLayout>

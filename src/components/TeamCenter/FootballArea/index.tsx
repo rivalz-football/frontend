@@ -1,6 +1,6 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
-import { Area } from "./Area";
 import { FootballAreaBg } from "assets/images";
+import { Area } from "./Area";
 
 export const FootballArea = () => {
   return (
@@ -27,6 +27,7 @@ export const FootballArea = () => {
       </Text>
 
       <Area />
+
       <Button
         padding="8px 18px"
         textTransform="uppercase"
