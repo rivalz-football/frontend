@@ -4,7 +4,7 @@ import { Area } from "./Area";
 import { PenaltyBallIcon, PenaltyStartingPointIcon } from "assets/icons";
 import Lottie from "react-lottie";
 import { AnimationProps } from "containers/GoalFlip";
-
+import { GoalFlipAnimation } from "../Animation";
 type GoalFlipAreaProps = {
   animation: AnimationProps;
   setAnimation: (animation: AnimationProps) => void;
