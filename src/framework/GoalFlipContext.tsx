@@ -19,6 +19,7 @@ import { GoalFlipClient } from "./GoalFlipClient";
 type IProgramInfo = {
   programAddress: string;
   footballAccountAddress: string;
+  adminAccountAddress: string;
 };
 
 type GoalFlipContextType = {

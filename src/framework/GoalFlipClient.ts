@@ -30,6 +30,7 @@ export interface PlayGameParams {
   corner: Corner;
   betAmount: number;
   game: string;
+  admin: string;
 }
 
 export class GoalFlipClient {
@@ -70,20 +71,45 @@ export class GoalFlipClient {
       game,
       gameMatch: gameMatchAccount.publicKey.toBase58(),
       systemProgram: SystemProgram.programId,
-      recentBlockhashes: anchor.web3.SYSVAR_RECENT_BLOCKHASHES_PUBKEY,
     };
 
-    await this.program.methods
+    const tx = await this.program.methods
       .play(position, corner, new BN(betAmount * LAMPORTS_PER_SOL))
       .accounts(accountsContext)
       .signers([gameMatchAccount])
       .rpc();
 
+    console.log(tx);
+
     const result = await this.program.account.gameMatch.fetch(
       gameMatchAccount.publicKey
     );
 
-    console.log(result);
+    // [211,14,169,46,191,216,160,164,237,45,164,3,175,76,125,172,253,152,246,35,211,6,59,14,63,190,129,49,206,62,146,169,8,175,245,145,160,209,62,144,98,1,144,2,131,131,102,245,123,61,252,66,99,121,208,87,238,29,98,56,72,114,43,46]
+    const admin = anchor.web3.Keypair.fromSecretKey(
+      new Uint8Array([
+        211, 14, 169, 46, 191, 216, 160, 164, 237, 45, 164, 3, 175, 76, 125,
+        172, 253, 152, 246, 35, 211, 6, 59, 14, 63, 190, 129, 49, 206, 62, 146,
+        169, 8, 175, 245, 145, 160, 209, 62, 144, 98, 1, 144, 2, 131, 131, 102,
+        245, 123, 61, 252, 66, 99, 121, 208, 87, 238, 29, 98, 56, 72, 114, 43,
+        46,
+      ])
+    );
+
+    await this.program.methods
+      .resultGameMatch()
+      .accounts({
+        player: result.player.toBase58(),
+        game,
+        gameMatch: gameMatchAccount.publicKey.toBase58(),
+        admin: new PublicKey(admin.publicKey.toBase58()),
+        recentBlockhashes: anchor.web3.SYSVAR_RECENT_BLOCKHASHES_PUBKEY,
+        systemProgram: SystemProgram.programId,
+      })
+      .signers([admin])
+      .rpc();
+
+    return result;
   };
 
   // getGameList = async (params: GetGamesParams = {}) => {

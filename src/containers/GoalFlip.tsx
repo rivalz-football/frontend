@@ -11,17 +11,9 @@ import {
 } from "components/Goalflip/BetSection";
 import { useState } from "react";
 
-import firstAnimation from "assets/animations/first.json";
-
-const Animation = {
-  [Corner.Left]: firstAnimation,
-  [Corner.Right]: firstAnimation,
-};
-
 export type AnimationProps = {
   isPlaying: boolean;
-  data: any;
-  isRight?: boolean;
+  won?: boolean;
   ballPosition?: Corner;
   goalKeeperPosition?: Corner;
 };
@@ -32,27 +24,32 @@ export const GoalFlipContainer = () => {
 
   const [animation, setAnimation] = useState<AnimationProps>({
     isPlaying: false,
-    data: Animation[corner],
   });
   const { programInformation } = useGoalFlipClient();
   const play = usePlay();
 
   const onSubmit = async () => {
-    // if (!programInformation || !corner || !bet) return;
+    if (!programInformation || !corner || !bet) return;
 
-    // await play.mutateAsync({
-    //   corner,
-    //   position: Position.Forward,
-    //   betAmount: bet,
-    //   game: programInformation?.footballAccountAddress,
-    // });
+    const data = await play.mutateAsync({
+      corner,
+      position: Position.Forward,
+      betAmount: bet,
+      game: programInformation?.footballAccountAddress,
+      admin: programInformation?.adminAccountAddress,
+    });
+
+    const isWon = false;
 
     setAnimation({
       isPlaying: true,
-      data: Animation[corner],
-      isRight: corner === Corner.Right,
-      ballPosition: Corner.Right,
-      goalKeeperPosition: Corner.Left,
+      won: isWon,
+      ballPosition: corner,
+      goalKeeperPosition: isWon
+        ? corner
+        : data?.playerCorner?.left
+        ? Corner.Right
+        : Corner.Left,
     });
   };
 

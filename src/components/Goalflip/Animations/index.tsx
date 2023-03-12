@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import Lottie from "react-lottie";
 
 import goalAnimationJson from "assets/animations/goal.json";
-import { PenalyPosition } from "./PenaltyPosition";
+import kickAnimationJson from "assets/animations/first.json";
+
+import ballAnimationJson from "assets/animations/ball.json";
+import goalKeeperAnimationJson from "assets/animations/goalkeeper.json";
+import { Corner } from "framework/GoalFlipClient";
 
 export type GoalFlipAnimationProps = {
   animation: AnimationProps;
@@ -14,7 +18,34 @@ export type GoalFlipAnimationProps = {
 export const BotWinAnimation = (props: GoalFlipAnimationProps) => {
   const { animation, setAnimation } = props;
 
-  return <PenalyPosition animation={animation} setAnimation={setAnimation} />;
+  return (
+    <Lottie
+      style={{
+        position: "absolute",
+        top: "0",
+        transform:
+          animation.goalKeeperPosition === Corner.Left
+            ? "scaleX(-1)"
+            : "scaleX(1)",
+      }}
+      options={{
+        animationData: kickAnimationJson,
+        loop: false,
+      }}
+      height="250px"
+      width="250px"
+      isStopped={!animation.isPlaying}
+      isClickToPauseDisabled
+      eventListeners={[
+        {
+          eventName: "complete",
+          callback: () => {
+            setAnimation({ ...animation, isPlaying: false });
+          },
+        },
+      ]}
+    />
+  );
 };
 
 enum Step {
@@ -27,10 +58,6 @@ export const PlayerWinAnimation = (props: GoalFlipAnimationProps) => {
   const { animation, setAnimation } = props;
   const [currentStep, setCurrentStep] = useState(Step.GOAL_KICK_ANIMATION);
 
-  const animationData =
-    (currentStep === Step.GOAL_KICK_ANIMATION && animation.data) ||
-    (currentStep === Step.GOAL_SCORED_ANIMATION && goalAnimationJson);
-
   useEffect(() => {
     if (currentStep === Step.WIN_AMOUNT_ANIMATION)
       setTimeout(() => {
@@ -41,8 +68,78 @@ export const PlayerWinAnimation = (props: GoalFlipAnimationProps) => {
 
   return (
     <>
-      {animationData && (
-        <PenalyPosition animation={animation} setAnimation={setAnimation} />
+      {currentStep === Step.GOAL_KICK_ANIMATION && (
+        <>
+          <Lottie
+            style={{
+              position: "absolute",
+              top: "0",
+              transform:
+                animation.ballPosition == Corner.Right
+                  ? "scaleX(-1)"
+                  : "scaleX(1)",
+            }}
+            options={{
+              animationData: ballAnimationJson,
+              loop: false,
+            }}
+            height="250px"
+            width="250px"
+            isStopped={!animation.isPlaying}
+            isClickToPauseDisabled
+            eventListeners={[
+              {
+                eventName: "complete",
+                callback: () => {
+                  setCurrentStep(Step.GOAL_SCORED_ANIMATION);
+                },
+              },
+            ]}
+          />
+          <Lottie
+            style={{
+              position: "absolute",
+              top: "0",
+              transform:
+                animation.goalKeeperPosition == Corner.Right
+                  ? "scaleX(1)"
+                  : "scaleX(-1)",
+            }}
+            options={{
+              animationData: goalKeeperAnimationJson,
+              loop: false,
+            }}
+            height="250px"
+            width="250px"
+            isStopped={!animation.isPlaying}
+            isClickToPauseDisabled
+          />
+        </>
+      )}
+
+      {currentStep === Step.GOAL_SCORED_ANIMATION && (
+        <Lottie
+          style={{
+            position: "absolute",
+            top: "0",
+          }}
+          options={{
+            animationData: goalAnimationJson,
+            loop: false,
+          }}
+          height="250px"
+          width="250px"
+          isStopped={!animation.isPlaying}
+          isClickToPauseDisabled
+          eventListeners={[
+            {
+              eventName: "complete",
+              callback: () => {
+                setCurrentStep(Step.WIN_AMOUNT_ANIMATION);
+              },
+            },
+          ]}
+        />
       )}
 
       {currentStep === Step.WIN_AMOUNT_ANIMATION && (

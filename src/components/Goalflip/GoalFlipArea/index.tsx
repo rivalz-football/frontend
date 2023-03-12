@@ -26,7 +26,6 @@ export const GoalFlipArea = (props: GoalFlipAreaProps) => {
       width="100%"
     >
       <Area />
-
       {!animation.isPlaying && (
         <>
           <PenaltyStartingPointIcon
@@ -44,9 +43,11 @@ export const GoalFlipArea = (props: GoalFlipAreaProps) => {
         </>
       )}
 
-      {animation.isPlaying && animation.isRight ? (
+      {animation.isPlaying && animation.won && (
         <PlayerWinAnimation animation={animation} setAnimation={setAnimation} />
-      ) : (
+      )}
+
+      {animation.isPlaying && !animation.won && (
         <BotWinAnimation animation={animation} setAnimation={setAnimation} />
       )}
     </Flex>

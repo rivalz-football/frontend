@@ -42,11 +42,6 @@ export type GoalFlip = {
           isSigner: true;
         },
         {
-          name: "recentBlockhashes";
-          isMut: false;
-          isSigner: false;
-        },
-        {
           name: "systemProgram";
           isMut: false;
           isSigner: false;
@@ -66,6 +61,42 @@ export type GoalFlip = {
           type: "u64";
         }
       ];
+    },
+    {
+      name: "resultGameMatch";
+      accounts: [
+        {
+          name: "game";
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: "gameMatch";
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: "player";
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: "admin";
+          isMut: true;
+          isSigner: true;
+        },
+        {
+          name: "recentBlockhashes";
+          isMut: false;
+          isSigner: false;
+        },
+        {
+          name: "systemProgram";
+          isMut: false;
+          isSigner: false;
+        }
+      ];
+      args: [];
     }
   ];
   accounts: [
@@ -109,6 +140,12 @@ export type GoalFlip = {
           {
             name: "matchDate";
             type: "u64";
+          },
+          {
+            name: "status";
+            type: {
+              defined: "GameMatchStatus";
+            };
           }
         ];
       };
@@ -186,6 +223,23 @@ export type GoalFlip = {
           }
         ];
       };
+    },
+    {
+      name: "GameMatchStatus";
+      type: {
+        kind: "enum";
+        variants: [
+          {
+            name: "Pending";
+          },
+          {
+            name: "Won";
+          },
+          {
+            name: "Lost";
+          }
+        ];
+      };
     }
   ];
   errors: [
@@ -213,6 +267,16 @@ export type GoalFlip = {
       code: 6004;
       name: "NoEnoughFund";
       msg: "No Enough Fund";
+    },
+    {
+      code: 6005;
+      name: "GameMatchAlreadyFinished";
+      msg: "Game Match Already Finished";
+    },
+    {
+      code: 6006;
+      name: "WrongPlayerToResult";
+      msg: "Wrong Player To Result";
     }
   ];
 };
@@ -261,11 +325,6 @@ export const IDL: GoalFlip = {
           isSigner: true,
         },
         {
-          name: "recentBlockhashes",
-          isMut: false,
-          isSigner: false,
-        },
-        {
           name: "systemProgram",
           isMut: false,
           isSigner: false,
@@ -285,6 +344,42 @@ export const IDL: GoalFlip = {
           type: "u64",
         },
       ],
+    },
+    {
+      name: "resultGameMatch",
+      accounts: [
+        {
+          name: "game",
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: "gameMatch",
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: "player",
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: "admin",
+          isMut: true,
+          isSigner: true,
+        },
+        {
+          name: "recentBlockhashes",
+          isMut: false,
+          isSigner: false,
+        },
+        {
+          name: "systemProgram",
+          isMut: false,
+          isSigner: false,
+        },
+      ],
+      args: [],
     },
   ],
   accounts: [
@@ -328,6 +423,12 @@ export const IDL: GoalFlip = {
           {
             name: "matchDate",
             type: "u64",
+          },
+          {
+            name: "status",
+            type: {
+              defined: "GameMatchStatus",
+            },
           },
         ],
       },
@@ -406,6 +507,23 @@ export const IDL: GoalFlip = {
         ],
       },
     },
+    {
+      name: "GameMatchStatus",
+      type: {
+        kind: "enum",
+        variants: [
+          {
+            name: "Pending",
+          },
+          {
+            name: "Won",
+          },
+          {
+            name: "Lost",
+          },
+        ],
+      },
+    },
   ],
   errors: [
     {
@@ -432,6 +550,16 @@ export const IDL: GoalFlip = {
       code: 6004,
       name: "NoEnoughFund",
       msg: "No Enough Fund",
+    },
+    {
+      code: 6005,
+      name: "GameMatchAlreadyFinished",
+      msg: "Game Match Already Finished",
+    },
+    {
+      code: 6006,
+      name: "WrongPlayerToResult",
+      msg: "Wrong Player To Result",
     },
   ],
 };
