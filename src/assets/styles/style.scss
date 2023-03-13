@@ -75,3 +75,31 @@ body {
     transform: translateX(0);
   }
 }
+
+.highlight-animation {
+  animation: highlight 5s linear;
+  transition: animation 1s ease-in-out;
+  border: 1px solid #111111;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+@keyframes highlight {
+  0% {
+    border-color: #111111;
+  }
+  25% {
+    border-color: rgba($color: #ffff33, $alpha: 0.7);
+    background-color: rgba($color: #ffff33, $alpha: 0.1);
+  }
+  50% {
+    border-color: rgba($color: #ffff33, $alpha: 0.7);
+    background-color: rgba($color: #ffff33, $alpha: 0.1);
+  }
+  75% {
+    border-color: #fff;
+  }
+  100% {
+    border-color: #111111;
+  }
+}

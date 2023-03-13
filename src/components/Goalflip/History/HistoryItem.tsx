@@ -25,6 +25,7 @@ export const HistoryItem = (props: GameMatch) => {
       padding="14px 20px"
       justifyContent="space-between"
       gap="20px"
+      className="highlight-animation"
     >
       <Flex flexDirection="column" gap="3px">
         <Text
