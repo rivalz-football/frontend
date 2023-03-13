@@ -80,6 +80,7 @@ export const GoalFlipContainer = () => {
               : betAmount.toNumber() + commissionAmount.toNumber()) /
             LAMPORTS_PER_SOL,
         });
+        queryClient.invalidateQueries(["ME_SOLANA_BALANCE"]);
       }
     );
 

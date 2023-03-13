@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import axios from "plugins/axios";
 import { TransactionType } from "assets/types";
+import { useGoalFlipClient } from "framework/GoalFlipContext";
 
 export const useAuthMe = () => {
   return useQuery(
@@ -85,4 +86,12 @@ export const useMePlayers = () => {
       refetchOnWindowFocus: false,
     }
   );
+};
+
+export const useMeSolanaBalance = () => {
+  const { client: goalFlipClient } = useGoalFlipClient();
+
+  return useQuery(["ME_SOLANA_BALANCE"], () => {
+    return goalFlipClient?.getBalance();
+  });
 };
