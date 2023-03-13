@@ -61,7 +61,9 @@ export const GoalFlipContainer = () => {
           commissionAmount,
         } = event;
 
-        queryClient.invalidateQueries(["GAME_HISTORY", game.toString()]);
+        setTimeout(() => {
+          queryClient.invalidateQueries(["GAME_HISTORY", game.toString()]);
+        }, 1000 * 5);
 
         if (player.toBase58() !== client.provider.publicKey.toBase58()) return;
 
@@ -81,9 +83,7 @@ export const GoalFlipContainer = () => {
             LAMPORTS_PER_SOL,
         });
 
-        setTimeout(() => {
-          queryClient.invalidateQueries(["ME_SOLANA_BALANCE"]);
-        }, 1000 * 5);
+        queryClient.invalidateQueries(["ME_SOLANA_BALANCE"]);
       }
     );
 
