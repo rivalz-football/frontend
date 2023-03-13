@@ -2,36 +2,34 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { RecentPlays } from "components/Goalflip/History";
 import { DashboardLayout } from "layouts/Dashboard";
 import { useGoalFlipClient } from "framework/GoalFlipContext";
-import { usePlay } from "hooks/useGoalFlip";
+import { useGameHistory, usePlay } from "hooks/useGoalFlip";
 import { Corner, Position } from "framework/GoalFlipClient";
 import { GoalFlipArea } from "components/Goalflip/GoalFlipArea";
 import {
   SelectBetInput,
   SelectCornerInput,
 } from "components/Goalflip/BetSection";
-import { useState } from "react";
-
-import firstAnimation from "assets/animations/first.json";
-
-const Animation = {
-  [Corner.Left]: firstAnimation,
-  [Corner.Right]: firstAnimation,
-};
+import { useEffect, useState } from "react";
+import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
+import { useQueryClient } from "react-query";
 
 export type AnimationProps = {
   isPlaying: boolean;
-  data: any;
+  won?: boolean;
+  ballPosition?: Corner;
+  goalKeeperPosition?: Corner;
+  amount?: number;
 };
 
 export const GoalFlipContainer = () => {
+  const { client } = useGoalFlipClient();
   const [corner, setCorner] = useState(Corner.Left);
   const [bet, setBet] = useState(0.1);
 
   const [animation, setAnimation] = useState<AnimationProps>({
     isPlaying: false,
-    data: Animation[corner],
   });
-
   const { programInformation } = useGoalFlipClient();
   const play = usePlay();
 
@@ -43,13 +41,54 @@ export const GoalFlipContainer = () => {
       position: Position.Forward,
       betAmount: bet,
       game: programInformation?.footballAccountAddress,
-    });
-
-    setAnimation({
-      isPlaying: true,
-      data: Animation[corner],
+      admin: programInformation?.adminAccountAddress,
     });
   };
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const listener = client?.program.addEventListener(
+      "ResultGameMatchEvent",
+      (event) => {
+        const {
+          game,
+          player,
+          won,
+          playerCorner,
+          wonAmount,
+          betAmount,
+          commissionAmount,
+        } = event;
+
+        queryClient.invalidateQueries(["GAME_HISTORY", game.toString()]);
+
+        if (player.toBase58() !== client.provider.publicKey.toBase58()) return;
+
+        setAnimation({
+          isPlaying: true,
+          won,
+          ballPosition: corner,
+          goalKeeperPosition: won
+            ? corner
+            : playerCorner?.left
+            ? Corner.Right
+            : Corner.Left,
+          amount:
+            (won
+              ? wonAmount.toNumber()
+              : betAmount.toNumber() + commissionAmount.toNumber()) /
+            LAMPORTS_PER_SOL,
+        });
+      }
+    );
+
+    return () => {
+      if (listener !== undefined) {
+        client?.program.removeEventListener(listener);
+      }
+    };
+  }, [client?.program, queryClient]);
 
   return (
     <DashboardLayout>
@@ -102,7 +141,9 @@ export const GoalFlipContainer = () => {
           </Flex>
         </Flex>
 
-        <RecentPlays />
+        {programInformation?.footballAccountAddress && (
+          <RecentPlays game={programInformation.footballAccountAddress} />
+        )}
       </Flex>
     </DashboardLayout>
   );

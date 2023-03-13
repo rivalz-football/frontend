@@ -42,11 +42,6 @@ export type GoalFlip = {
           isSigner: true;
         },
         {
-          name: "recentBlockhashes";
-          isMut: false;
-          isSigner: false;
-        },
-        {
           name: "systemProgram";
           isMut: false;
           isSigner: false;
@@ -66,6 +61,42 @@ export type GoalFlip = {
           type: "u64";
         }
       ];
+    },
+    {
+      name: "resultGameMatch";
+      accounts: [
+        {
+          name: "game";
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: "gameMatch";
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: "player";
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: "admin";
+          isMut: true;
+          isSigner: true;
+        },
+        {
+          name: "recentBlockhashes";
+          isMut: false;
+          isSigner: false;
+        },
+        {
+          name: "systemProgram";
+          isMut: false;
+          isSigner: false;
+        }
+      ];
+      args: [];
     }
   ];
   accounts: [
@@ -103,12 +134,22 @@ export type GoalFlip = {
             type: "u64";
           },
           {
+            name: "commissionAmount";
+            type: "u64";
+          },
+          {
             name: "wonAmount";
             type: "u64";
           },
           {
-            name: "matchDate";
+            name: "createdAt";
             type: "u64";
+          },
+          {
+            name: "status";
+            type: {
+              defined: "GameMatchStatus";
+            };
           }
         ];
       };
@@ -120,14 +161,14 @@ export type GoalFlip = {
         fields: [
           {
             name: "multiplier";
-            type: "u8";
+            type: "u16";
           },
           {
-            name: "commission";
-            type: "u64";
+            name: "commissionRate";
+            type: "u16";
           },
           {
-            name: "initAt";
+            name: "createdAt";
             type: "u64";
           },
           {
@@ -186,6 +227,74 @@ export type GoalFlip = {
           }
         ];
       };
+    },
+    {
+      name: "GameMatchStatus";
+      type: {
+        kind: "enum";
+        variants: [
+          {
+            name: "Pending";
+          },
+          {
+            name: "Won";
+          },
+          {
+            name: "Lost";
+          }
+        ];
+      };
+    }
+  ];
+  events: [
+    {
+      name: "ResultGameMatchEvent";
+      fields: [
+        {
+          name: "game";
+          type: "publicKey";
+          index: false;
+        },
+        {
+          name: "player";
+          type: "publicKey";
+          index: false;
+        },
+        {
+          name: "won";
+          type: "bool";
+          index: false;
+        },
+        {
+          name: "position";
+          type: {
+            defined: "Position";
+          };
+          index: false;
+        },
+        {
+          name: "playerCorner";
+          type: {
+            defined: "Corner";
+          };
+          index: false;
+        },
+        {
+          name: "betAmount";
+          type: "u64";
+          index: false;
+        },
+        {
+          name: "commissionAmount";
+          type: "u64";
+          index: false;
+        },
+        {
+          name: "wonAmount";
+          type: "u64";
+          index: false;
+        }
+      ];
     }
   ];
   errors: [
@@ -213,6 +322,16 @@ export type GoalFlip = {
       code: 6004;
       name: "NoEnoughFund";
       msg: "No Enough Fund";
+    },
+    {
+      code: 6005;
+      name: "GameMatchAlreadyFinished";
+      msg: "Game Match Already Finished";
+    },
+    {
+      code: 6006;
+      name: "WrongPlayerToResult";
+      msg: "Wrong Player To Result";
     }
   ];
 };
@@ -261,11 +380,6 @@ export const IDL: GoalFlip = {
           isSigner: true,
         },
         {
-          name: "recentBlockhashes",
-          isMut: false,
-          isSigner: false,
-        },
-        {
           name: "systemProgram",
           isMut: false,
           isSigner: false,
@@ -285,6 +399,42 @@ export const IDL: GoalFlip = {
           type: "u64",
         },
       ],
+    },
+    {
+      name: "resultGameMatch",
+      accounts: [
+        {
+          name: "game",
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: "gameMatch",
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: "player",
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: "admin",
+          isMut: true,
+          isSigner: true,
+        },
+        {
+          name: "recentBlockhashes",
+          isMut: false,
+          isSigner: false,
+        },
+        {
+          name: "systemProgram",
+          isMut: false,
+          isSigner: false,
+        },
+      ],
+      args: [],
     },
   ],
   accounts: [
@@ -322,12 +472,22 @@ export const IDL: GoalFlip = {
             type: "u64",
           },
           {
+            name: "commissionAmount",
+            type: "u64",
+          },
+          {
             name: "wonAmount",
             type: "u64",
           },
           {
-            name: "matchDate",
+            name: "createdAt",
             type: "u64",
+          },
+          {
+            name: "status",
+            type: {
+              defined: "GameMatchStatus",
+            },
           },
         ],
       },
@@ -339,14 +499,14 @@ export const IDL: GoalFlip = {
         fields: [
           {
             name: "multiplier",
-            type: "u8",
+            type: "u16",
           },
           {
-            name: "commission",
-            type: "u64",
+            name: "commissionRate",
+            type: "u16",
           },
           {
-            name: "initAt",
+            name: "createdAt",
             type: "u64",
           },
           {
@@ -406,6 +566,74 @@ export const IDL: GoalFlip = {
         ],
       },
     },
+    {
+      name: "GameMatchStatus",
+      type: {
+        kind: "enum",
+        variants: [
+          {
+            name: "Pending",
+          },
+          {
+            name: "Won",
+          },
+          {
+            name: "Lost",
+          },
+        ],
+      },
+    },
+  ],
+  events: [
+    {
+      name: "ResultGameMatchEvent",
+      fields: [
+        {
+          name: "game",
+          type: "publicKey",
+          index: false,
+        },
+        {
+          name: "player",
+          type: "publicKey",
+          index: false,
+        },
+        {
+          name: "won",
+          type: "bool",
+          index: false,
+        },
+        {
+          name: "position",
+          type: {
+            defined: "Position",
+          },
+          index: false,
+        },
+        {
+          name: "playerCorner",
+          type: {
+            defined: "Corner",
+          },
+          index: false,
+        },
+        {
+          name: "betAmount",
+          type: "u64",
+          index: false,
+        },
+        {
+          name: "commissionAmount",
+          type: "u64",
+          index: false,
+        },
+        {
+          name: "wonAmount",
+          type: "u64",
+          index: false,
+        },
+      ],
+    },
   ],
   errors: [
     {
@@ -432,6 +660,16 @@ export const IDL: GoalFlip = {
       code: 6004,
       name: "NoEnoughFund",
       msg: "No Enough Fund",
+    },
+    {
+      code: 6005,
+      name: "GameMatchAlreadyFinished",
+      msg: "Game Match Already Finished",
+    },
+    {
+      code: 6006,
+      name: "WrongPlayerToResult",
+      msg: "Wrong Player To Result",
     },
   ],
 };

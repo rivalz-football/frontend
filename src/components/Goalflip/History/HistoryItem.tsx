@@ -1,8 +1,24 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { PlaysPropsType } from "assets/types";
+import { GameMatch } from "framework/GoalFlipClient";
+import { sanitizeWalletAddress } from "plugins/sanitize-user";
 
-export const PlaysItem = (props: PlaysPropsType) => {
-  const { plays } = props;
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
+
+export const HistoryItem = (props: GameMatch) => {
+  const {
+    address,
+    player,
+    won,
+    createdAt,
+    playerCorner,
+    wonAmount,
+    betAmount,
+    commissionAmount,
+  } = props;
+
   return (
     <Flex
       background="#111111"
@@ -17,25 +33,26 @@ export const PlaysItem = (props: PlaysPropsType) => {
           lineHeight="17px"
           fontSize="13px"
         >
-          <strong>{plays.username}</strong> shot into the {plays.cornerSide}{" "}
-          {plays.position === plays.cornerSide
+          <strong>{sanitizeWalletAddress(player)}</strong> shot into the{" "}
+          {playerCorner}
+          {!won
             ? `but goalkeeper 
                 does not allow the goal.`
             : `and scored.`}
         </Text>
         <Text fontSize="10px" lineHeight="13px" opacity="0.33">
-          {plays.time}m ago
+          {dayjs(createdAt * 1000).fromNow()}
         </Text>
       </Flex>
       <Text
         display="block"
         padding="8px 0"
-        color={plays.position === plays.cornerSide ? "#21CD44" : "#AA2D1C"}
+        color={won ? "#21CD44" : "#AA2D1C"}
         fontWeight={700}
         textTransform="uppercase"
         minWidth="fit-content"
       >
-        {plays.position === plays.cornerSide ? "+ 1 Sol" : "- 2 sol"}
+        {won ? wonAmount : betAmount + commissionAmount}
       </Text>
     </Flex>
   );

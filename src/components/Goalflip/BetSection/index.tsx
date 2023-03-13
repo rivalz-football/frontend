@@ -23,7 +23,7 @@ export const SelectCornerInput = (props: SelectCornerInputProps) => {
           isEnabled={corner === item}
           fontSize="19px"
         >
-          {item} Corner
+          {item}
         </BetButton>
       ))}
     </Flex>

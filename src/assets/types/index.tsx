@@ -208,14 +208,3 @@ export interface IUserToken {
   information: IToken;
   balance: number;
 }
-
-export type PlaysType = {
-  username: string;
-  cornerSide: string;
-  position: string;
-  time: number;
-};
-
-export type PlaysPropsType = {
-  plays: PlaysType;
-};

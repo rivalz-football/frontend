@@ -4,6 +4,7 @@ import { Area } from "./Area";
 import { PenaltyBallIcon, PenaltyStartingPointIcon } from "assets/icons";
 import Lottie from "react-lottie";
 import { AnimationProps } from "containers/GoalFlip";
+import { BotWinAnimation, PlayerWinAnimation } from "../Animations";
 
 type GoalFlipAreaProps = {
   animation: AnimationProps;
@@ -25,7 +26,6 @@ export const GoalFlipArea = (props: GoalFlipAreaProps) => {
       width="100%"
     >
       <Area />
-
       {!animation.isPlaying && (
         <>
           <PenaltyStartingPointIcon
@@ -43,27 +43,13 @@ export const GoalFlipArea = (props: GoalFlipAreaProps) => {
         </>
       )}
 
-      <Lottie
-        style={{
-          position: "absolute",
-          top: "-100px",
-        }}
-        options={{
-          animationData: animation.data,
-          loop: false,
-        }}
-        isStopped={!animation.isPlaying}
-        isClickToPauseDisabled
-        eventListeners={[
-          {
-            eventName: "complete",
-            callback: () => {
-              console.log("complete");
-              setAnimation({ isPlaying: false, data: animation.data });
-            },
-          },
-        ]}
-      />
+      {animation.isPlaying && animation.won && (
+        <PlayerWinAnimation animation={animation} setAnimation={setAnimation} />
+      )}
+
+      {animation.isPlaying && !animation.won && (
+        <BotWinAnimation animation={animation} setAnimation={setAnimation} />
+      )}
     </Flex>
   );
 };
