@@ -93,7 +93,11 @@ export class GoalFlipClient {
       filters
     )) as ProgramAccount<OriginalGameMatch>[];
 
-    const mappedPrefetchedList = prefetchedList.map((x) => {
+    const filteredPrefetchedList = prefetchedList.filter(
+      (x) => !x.account.status.pending
+    );
+
+    const mappedPrefetchedList = filteredPrefetchedList.map((x) => {
       return {
         address: x.publicKey.toBase58(),
         player: x.account.player.toBase58(),
