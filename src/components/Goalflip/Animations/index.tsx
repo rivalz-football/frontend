@@ -96,6 +96,7 @@ export const PlayerWinAnimation = (props: GoalFlipAnimationProps) => {
                 animation.ballPosition == Corner.Right
                   ? "scaleX(-1)"
                   : "scaleX(1)",
+              zIndex: 2,
             }}
             options={{
               animationData: ballAnimationJson,
@@ -122,6 +123,7 @@ export const PlayerWinAnimation = (props: GoalFlipAnimationProps) => {
                 animation.goalKeeperPosition == Corner.Right
                   ? "scaleX(1)"
                   : "scaleX(-1)",
+              zIndex: 1,
             }}
             options={{
               animationData: goalKeeperAnimationJson,
