@@ -19,7 +19,7 @@ export const usePlay = () => {
       onError: (error: any) => {
         toast({
           title: "Error",
-          description: error.message,
+          description: error?.response?.data?.message || error.message,
           status: "error",
           duration: 3000,
           isClosable: true,
