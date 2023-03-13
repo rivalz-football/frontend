@@ -17,9 +17,14 @@ export const usePlay = () => {
     {
       onSuccess: () => {},
       onError: (error: any) => {
+        const errorMessage =
+          error.message.match(/Error Message: (.+)/)[1] ||
+          error?.response?.data?.message ||
+          error.message;
+
         toast({
           title: "Error",
-          description: error?.response?.data?.message || error.message,
+          description: errorMessage,
           status: "error",
           duration: 3000,
           isClosable: true,

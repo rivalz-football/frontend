@@ -80,7 +80,10 @@ export const GoalFlipContainer = () => {
               : betAmount.toNumber() + commissionAmount.toNumber()) /
             LAMPORTS_PER_SOL,
         });
-        queryClient.invalidateQueries(["ME_SOLANA_BALANCE"]);
+
+        setTimeout(() => {
+          queryClient.invalidateQueries(["ME_SOLANA_BALANCE"]);
+        }, 1000 * 5);
       }
     );
 
@@ -136,6 +139,7 @@ export const GoalFlipContainer = () => {
               }}
               isLoading={play.isLoading}
               onClick={onSubmit}
+              isDisabled={animation.isPlaying}
             >
               shoot!
             </Button>
