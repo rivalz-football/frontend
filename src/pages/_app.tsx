@@ -20,6 +20,7 @@ import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { useCluster } from "hooks/useCluster";
 import { Spin } from "components/common/Spinner";
 import Head from "next/head";
+import { GoalFlipContextProvider } from "framework/GoalFlipContext";
 
 const queryClient = new QueryClient();
 
@@ -45,13 +46,15 @@ const Inner = ({ Component, pageProps }: AppProps) => {
       </Head>
       <Chakra cookies={pageProps.cookies}>
         <WalletProvider wallets={wallets} autoConnect>
-          <WalletModalProvider>
-            <UserAuthProvider>
-              <SidebarToggle>
-                <Component {...pageProps} />
-              </SidebarToggle>
-            </UserAuthProvider>
-          </WalletModalProvider>
+          <GoalFlipContextProvider>
+            <WalletModalProvider>
+              <UserAuthProvider>
+                <SidebarToggle>
+                  <Component {...pageProps} />
+                </SidebarToggle>
+              </UserAuthProvider>
+            </WalletModalProvider>
+          </GoalFlipContextProvider>
         </WalletProvider>
       </Chakra>
     </ConnectionProvider>

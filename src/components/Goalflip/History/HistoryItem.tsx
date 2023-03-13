@@ -33,8 +33,8 @@ export const HistoryItem = (props: GameMatch) => {
           lineHeight="17px"
           fontSize="13px"
         >
-          <strong>{sanitizeWalletAddress(player)}</strong> shot into the{" "}
-          {playerCorner}
+          <strong>{sanitizeWalletAddress(player)}</strong> shot into the&nbsp;
+          {playerCorner.toLowerCase()}&nbsp;
           {!won
             ? `but goalkeeper 
                 does not allow the goal.`
