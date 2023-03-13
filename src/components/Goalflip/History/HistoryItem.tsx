@@ -52,7 +52,7 @@ export const HistoryItem = (props: GameMatch) => {
         textTransform="uppercase"
         minWidth="fit-content"
       >
-        {won ? wonAmount : betAmount + commissionAmount}
+        {won ? `+${wonAmount}` : `-${betAmount + commissionAmount}`}
       </Text>
     </Flex>
   );
