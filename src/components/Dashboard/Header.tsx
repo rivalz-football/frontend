@@ -33,8 +33,8 @@ import { SOL_MINT_ADDRESS } from "assets/data";
 export const Header = () => {
   const { toggleSidebar } = useSidebar();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  // const { data: token, isLoading } = useMeTokens(SOL_MINT_ADDRESS);
-  const { data: balance, isLoading } = useMeSolanaBalance();
+  const { data: token, isLoading } = useMeTokens(SOL_MINT_ADDRESS);
+  const { data: balance, isLoading: balanceLoading } = useMeSolanaBalance();
   return (
     <>
       <CgArrowsExchange
@@ -51,7 +51,7 @@ export const Header = () => {
       />
 
       <Flex alignItems="center" gap="15px">
-        {/* <Button
+        <Button
           background="rgba(217, 217, 217, 0.01)"
           border="1px solid rgba(255, 255, 255, 0.02)"
           borderRadius="4px"
@@ -61,22 +61,19 @@ export const Header = () => {
           onClick={onOpen}
         >
           Withdraw
-        </Button> */}
-        {/* {!isLoading && token && !balanceLoading && balance && ( */}
-        {!isLoading && (
+        </Button>
+        {!isLoading && token && !balanceLoading && balance && (
           <UserBalance
-            image="https://i.imgur.com/Q6fjbgI.png"
-            name="$SOL"
-            balance={balance || 0}
+            image={token.information.image}
+            name={token.information.symbol}
+            balance={balance}
           />
         )}
-
-        {/* )} */}
         <Notification count={4} countColor="#EC068D" icon={NotificationIcon} />
         <Notification count={4} countColor="#D95543" icon={GiftIcon} />
         <UserAvatar avatar="" />
       </Flex>
-      {/* <TransactionPopup isOpen={isOpen} onClose={onClose} token={token} /> */}
+      <TransactionPopup isOpen={isOpen} onClose={onClose} token={token} />
     </>
   );
 };
