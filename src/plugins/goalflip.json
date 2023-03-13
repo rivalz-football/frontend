@@ -101,7 +101,7 @@
   ],
   "accounts": [
     {
-      "name": "gameMatch",
+      "name": "GameMatch",
       "type": {
         "kind": "struct",
         "fields": [
@@ -134,11 +134,15 @@
             "type": "u64"
           },
           {
+            "name": "commissionAmount",
+            "type": "u64"
+          },
+          {
             "name": "wonAmount",
             "type": "u64"
           },
           {
-            "name": "matchDate",
+            "name": "createdAt",
             "type": "u64"
           },
           {
@@ -151,20 +155,20 @@
       }
     },
     {
-      "name": "game",
+      "name": "Game",
       "type": {
         "kind": "struct",
         "fields": [
           {
             "name": "multiplier",
-            "type": "u8"
+            "type": "u16"
           },
           {
-            "name": "commission",
-            "type": "u64"
+            "name": "commissionRate",
+            "type": "u16"
           },
           {
-            "name": "initAt",
+            "name": "createdAt",
             "type": "u64"
           },
           {
@@ -240,6 +244,57 @@
           }
         ]
       }
+    }
+  ],
+  "events": [
+    {
+      "name": "ResultGameMatchEvent",
+      "fields": [
+        {
+          "name": "game",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "player",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "won",
+          "type": "bool",
+          "index": false
+        },
+        {
+          "name": "position",
+          "type": {
+            "defined": "Position"
+          },
+          "index": false
+        },
+        {
+          "name": "playerCorner",
+          "type": {
+            "defined": "Corner"
+          },
+          "index": false
+        },
+        {
+          "name": "betAmount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "commissionAmount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "wonAmount",
+          "type": "u64",
+          "index": false
+        }
+      ]
     }
   ],
   "errors": [

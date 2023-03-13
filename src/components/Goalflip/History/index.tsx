@@ -7,16 +7,24 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
-import { PlaysItem } from "./PlaysItem";
 
-import { TeamPlayers } from "components/TeamCenter/Players/data/typeProps";
-import { FilterSmallIcon } from "assets/icons";
-import { PlayerPosition } from "assets/types";
-import { fakePlays } from "assets/data";
+import { useGameHistory } from "hooks/useGoalFlip";
+import { PublicKey } from "@solana/web3.js";
+import { GameMatch } from "framework/GoalFlipClient";
+import { HistoryItem } from "./HistoryItem";
 
-export const RecentPlays = () => {
+type RecentPlaysProps = {
+  game: string;
+};
+
+export const RecentPlays = (props: RecentPlaysProps) => {
+  const { game } = props;
+
+  const { data: history, isLoading } = useGameHistory(new PublicKey(game));
+
   return (
     <Flex minWidth="fit-content">
       <Box
@@ -45,11 +53,15 @@ export const RecentPlays = () => {
           </Text>
         </Flex>
 
-        <Flex direction="column" gap="11px">
-          {fakePlays.map((plays, index) => (
-            <PlaysItem key={index} plays={plays} />
-          ))}
-        </Flex>
+        {isLoading && <Spinner />}
+
+        {!isLoading && (
+          <Flex direction="column" gap="10px">
+            {history?.map((item: GameMatch) => (
+              <HistoryItem key={item.address} {...item} />
+            ))}
+          </Flex>
+        )}
       </Box>
     </Flex>
   );

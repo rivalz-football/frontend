@@ -1,5 +1,9 @@
 import * as anchor from "@project-serum/anchor";
-import { ACCOUNT_DISCRIMINATOR_SIZE, Program } from "@project-serum/anchor";
+import {
+  ACCOUNT_DISCRIMINATOR_SIZE,
+  Program,
+  ProgramAccount,
+} from "@project-serum/anchor";
 import {
   GetProgramAccountsFilter,
   Keypair,
@@ -12,6 +16,7 @@ import { BN } from "bn.js";
 import _, { orderBy } from "lodash";
 import bs58 from "bs58";
 import { GoalFlip } from "plugins/GoalFlip";
+import axios from "plugins/axios";
 // import { isAfter, isBefore } from "date-fns";
 // import slugify from "slugify";
 
@@ -33,6 +38,28 @@ export interface PlayGameParams {
   admin: string;
 }
 
+type OriginalGameMatch = Awaited<
+  ReturnType<Program<GoalFlip>["account"]["gameMatch"]["fetch"]>
+>;
+
+enum GameMatchStatus {
+  Pending = "Pending",
+  Won = "Won",
+  Lost = "Lost",
+}
+
+export type GameMatch = {
+  address: string;
+  player: string;
+  won: Boolean;
+  position: Position;
+  playerCorner: Corner;
+  betAmount: number;
+  commissionAmount: number;
+  wonAmount: number;
+  createdAt: number;
+};
+
 export class GoalFlipClient {
   public provider: anchor.AnchorProvider;
   public program: Program<GoalFlip>;
@@ -52,10 +79,44 @@ export class GoalFlipClient {
     }
   };
 
-  getGameHistory = async (gameId: PublicKey) => {
-    // const game = await this.program.account.game.fetch(gameId);
-    // const history = await this.program.account.gameHistory.all(gameId);
-    // return history;
+  getGameHistory = async (gameId: PublicKey): Promise<GameMatch[]> => {
+    const filters: GetProgramAccountsFilter[] = [
+      {
+        memcmp: {
+          offset: ACCOUNT_DISCRIMINATOR_SIZE,
+          bytes: gameId.toBase58(),
+        },
+      },
+    ];
+
+    const prefetchedList = (await this.program.account.gameMatch.all(
+      filters
+    )) as ProgramAccount<OriginalGameMatch>[];
+
+    const mappedPrefetchedList = prefetchedList.map((x) => {
+      return {
+        address: x.publicKey.toBase58(),
+        player: x.account.player.toBase58(),
+        createdAt: x.account.createdAt.toNumber(),
+        won: x.account.won,
+        position: x.account.position.forward
+          ? Position.Forward
+          : Position.Goalkeeper,
+        playerCorner: x.account.playerCorner.left ? Corner.Left : Corner.Right,
+        betAmount: x.account.betAmount.toNumber() / LAMPORTS_PER_SOL,
+        commissionAmount:
+          x.account.commissionAmount.toNumber() / LAMPORTS_PER_SOL,
+        wonAmount: x.account.wonAmount.toNumber() / LAMPORTS_PER_SOL,
+      };
+    });
+
+    const orderedPrefetchedList = orderBy(
+      mappedPrefetchedList,
+      (it) => it.createdAt,
+      "desc"
+    );
+
+    return orderedPrefetchedList;
   };
 
   createGameMatchAccount = () => {
@@ -73,73 +134,20 @@ export class GoalFlipClient {
       systemProgram: SystemProgram.programId,
     };
 
-    const tx = await this.program.methods
+    await this.program.methods
       .play(position, corner, new BN(betAmount * LAMPORTS_PER_SOL))
       .accounts(accountsContext)
       .signers([gameMatchAccount])
       .rpc();
 
-    console.log(tx);
-
     const result = await this.program.account.gameMatch.fetch(
       gameMatchAccount.publicKey
     );
 
-    await this.program.methods
-      .resultGameMatch()
-      .accounts({
-        player: result.player.toBase58(),
-        game,
-        gameMatch: gameMatchAccount.publicKey.toBase58(),
-        admin: data.admin,
-        recentBlockhashes: anchor.web3.SYSVAR_RECENT_BLOCKHASHES_PUBKEY,
-        systemProgram: SystemProgram.programId,
-      })
-      .rpc();
-
-    return result;
+    await axios.post("/web3/result-game", {
+      game: result.game.toBase58(),
+      gameMatch: gameMatchAccount.publicKey.toBase58(),
+      player: result.player.toBase58(),
+    });
   };
-
-  // getGameList = async (params: GetGamesParams = {}) => {
-  //   const { status, tag } = params;
-  //   const statusValue = (() => {
-  //     switch (status) {
-  //       case GameStatusEnum.DRAFT:
-  //         return 0;
-  //       case GameStatusEnum.ACTIVE:
-  //         return 1;
-  //       case GameStatusEnum.FINALIZED:
-  //         return 2;
-  //       case GameStatusEnum.FROZEN:
-  //         return 1;
-  //       default:
-  //         return undefined;
-  //     }
-  //   })();
-
-  //   const filters: GetProgramAccountsFilter[] = [
-  //     {
-  //       memcmp: this.program.coder.accounts.memcmp("Game"),
-  //     },
-  //   ];
-
-  //   if (statusValue !== undefined) {
-  //     filters.push({
-  //       memcmp: {
-  //         offset: ACCOUNT_DISCRIMINATOR_SIZE,
-  //         bytes: bs58.encode([statusValue]),
-  //       },
-  //     });
-  //   }
-
-  //   if (tag !== undefined) {
-  //     filters.push({
-  //       memcmp: {
-  //         offset: ACCOUNT_DISCRIMINATOR_SIZE + 1,
-  //         bytes: bs58.encode([tag]),
-  //       },
-  //     });
-  //   }
-
-  // }
 }

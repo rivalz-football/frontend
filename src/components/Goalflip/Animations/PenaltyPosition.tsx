@@ -46,7 +46,6 @@ export const PenalyPosition = (props: GoalFlipAnimationProps) => {
             {
               eventName: "complete",
               callback: () => {
-                console.log("complete");
                 setAnimation({ ...animation, isPlaying: false });
               },
             },
@@ -73,7 +72,6 @@ export const PenalyPosition = (props: GoalFlipAnimationProps) => {
             {
               eventName: "complete",
               callback: () => {
-                console.log("complete");
                 setAnimation({ ...animation, isPlaying: false });
               },
             },
