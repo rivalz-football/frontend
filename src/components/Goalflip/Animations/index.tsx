@@ -161,15 +161,7 @@ export const PlayerWinAnimation = (props: GoalFlipAnimationProps) => {
       )}
 
       {currentStep === Step.WIN_AMOUNT_ANIMATION && (
-        <Text
-          position="absolute"
-          margin="auto"
-          top="100px"
-          fontFamily="Score Board"
-          fontSize="20px"
-        >
-          Helloooo
-        </Text>
+        <ShowAmount amount={animation.amount} won={animation.won} />
       )}
     </>
   );
