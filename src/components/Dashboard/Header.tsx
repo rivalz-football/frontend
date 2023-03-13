@@ -27,14 +27,14 @@ import { CSSTransition } from "react-transition-group";
 import { TransactionPopup } from "components/common/TransactionPopup";
 import { useTokens } from "hooks/useToken";
 import { IToken, IUserToken } from "assets/types";
-import { useMeTokens } from "hooks/useUser";
+import { useMeSolanaBalance, useMeTokens } from "hooks/useUser";
 import { SOL_MINT_ADDRESS } from "assets/data";
 
 export const Header = () => {
   const { toggleSidebar } = useSidebar();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { data: token, isLoading } = useMeTokens(SOL_MINT_ADDRESS);
-
+  const { data: balance, isLoading: balanceLoading } = useMeSolanaBalance();
   return (
     <>
       <CgArrowsExchange
@@ -62,11 +62,11 @@ export const Header = () => {
         >
           Withdraw
         </Button>
-        {!isLoading && token && (
+        {!isLoading && token && !balanceLoading && balance && (
           <UserBalance
             image={token.information.image}
             name={token.information.symbol}
-            balance={token.balance}
+            balance={balance}
           />
         )}
         <Notification count={4} countColor="#EC068D" icon={NotificationIcon} />
